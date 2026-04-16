@@ -2,20 +2,19 @@ import { useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
+  Briefcase,
   CaretDown,
   Checks,
   Circuitry,
   FlowArrow,
   GearSix,
   HandCoins,
-  LockKey,
+  List,
   Path,
   Rows,
   Sparkle,
   UsersThree,
   X,
-  List,
-  Briefcase,
 } from "@phosphor-icons/react";
 
 type NavItem = {
@@ -29,8 +28,15 @@ type Benefit = {
   icon: ReactNode;
 };
 
+type ProofItem = {
+  title: string;
+  description: string;
+  icon: ReactNode;
+};
+
 type UseCase = {
   title: string;
+  description: string;
   bullets: string[];
   icon: ReactNode;
 };
@@ -54,50 +60,76 @@ const navItems: NavItem[] = [
 
 const benefits: Benefit[] = [
   {
-    title: "Menos retrabalho",
-    description: "Fluxos mais consistentes e menos tarefas repetidas no dia a dia.",
+    title: "Retrabalho fora do caminho",
+    description: "Informação atualizada no fluxo certo, sem repasse manual desnecessário.",
     icon: <Rows size={20} weight="duotone" />,
   },
   {
-    title: "Mais escala com controle",
-    description: "A operação cresce com regras claras, histórico e checkpoints.",
+    title: "Escala sem perder governança",
+    description: "Mais volume com regras claras, histórico e responsáveis definidos.",
     icon: <FlowArrow size={20} weight="duotone" />,
   },
   {
-    title: "Integração com a operação atual",
-    description: "Sem exigir troca de ERP, CRM ou sistemas já consolidados.",
+    title: "Automação sobre a stack atual",
+    description: "ERP, CRM, planilhas e e-mail seguem no processo, mais conectados.",
     icon: <Circuitry size={20} weight="duotone" />,
+  },
+];
+
+const proofItems: ProofItem[] = [
+  {
+    title: "Mapeamento de gargalos",
+    description: "Onde o fluxo trava, depende de repasse manual ou gera retrabalho.",
+    icon: <Rows size={18} weight="duotone" />,
+  },
+  {
+    title: "Prioridade por impacto",
+    description: "O que vale automatizar primeiro com ganho mais claro e implementação viável.",
+    icon: <FlowArrow size={18} weight="duotone" />,
+  },
+  {
+    title: "Desenho do fluxo",
+    description: "Como a automação se integra à operação atual sem romper sistemas existentes.",
+    icon: <Path size={18} weight="duotone" />,
+  },
+  {
+    title: "Checkpoints humanos",
+    description: "Quais etapas críticas devem manter validação, aprovação ou supervisão.",
+    icon: <Checks size={18} weight="duotone" />,
   },
 ];
 
 const useCases: UseCase[] = [
   {
     title: "Financeiro e administrativo",
+    description: "Fluxos críticos em que atraso e conferência manual costumam escalar rápido.",
     bullets: [
-      "Conciliação e conferência entre sistemas",
-      "Cobrança e follow-up com histórico",
-      "Organização de documentos e cadastros",
-      "Aprovações com validação humana",
+      "Cobrança com histórico, próxima ação e responsável",
+      "Conciliação com divergência sinalizada entre sistemas",
+      "Cadastro e documentação sem repasse manual entre áreas",
+      "Aprovações sensíveis com checkpoint humano",
     ],
     icon: <HandCoins size={22} weight="duotone" />,
   },
   {
     title: "Comercial",
+    description: "Etapas de pipeline que pedem contexto, ritmo e CRM bem alimentado.",
     bullets: [
-      "Triagem inicial de leads",
-      "Atualização de CRM sem digitação manual",
-      "Apoio à preparação de propostas",
-      "Follow-up por etapa e responsável",
+      "Lead triado antes de entrar no pipeline",
+      "CRM atualizado sem redigitação da operação",
+      "Proposta aberta com contexto e insumos já preenchidos",
+      "Follow-up por etapa com dono definido",
     ],
     icon: <Briefcase size={22} weight="duotone" />,
   },
   {
     title: "Atendimento e operações",
+    description: "Demandas que precisam circular com prioridade, contexto e padronização.",
     bullets: [
       "Roteamento de demandas por prioridade",
-      "Padronização de handoffs entre áreas",
-      "Abertura e atualização de fluxos internos",
-      "Retenção de conhecimento operacional",
+      "Abertura de fluxo com contexto preservado",
+      "Repasse entre áreas sem perda de informação",
+      "Validação humana em exceções e etapas críticas",
     ],
     icon: <UsersThree size={22} weight="duotone" />,
   },
@@ -106,27 +138,27 @@ const useCases: UseCase[] = [
 const steps: Step[] = [
   {
     title: "Diagnóstico",
-    description: "Mapeamos gargalos, sistemas e pontos de esforço manual.",
+    description: "Lemos o fluxo atual, as exceções e os pontos de atrito antes de automatizar.",
   },
   {
     title: "Priorização",
-    description: "Definimos os fluxos com melhor impacto e viabilidade.",
+    description: "Escolhemos o que gera ganho mais claro com implementação viável.",
   },
   {
     title: "Implementação",
-    description: "Automatizamos sem exigir troca do ambiente atual.",
+    description: "Conectamos a automação à operação sem romper o que já funciona.",
   },
   {
     title: "Validação e evolução",
-    description: "Ajustamos o fluxo com controle humano quando necessário.",
+    description: "Refinamos o fluxo com uso real e checkpoints onde o processo pede controle.",
   },
 ];
 
 const trustItems = [
-  "Sem trocar ERP ou CRM",
-  "Validação humana em etapas críticas",
-  "Implementação orientada por processo",
-  "Estrutura pensada com segurança e LGPD",
+  "Sem troca forçada de ERP ou CRM",
+  "Checkpoints humanos em etapas sensíveis",
+  "Fluxos desenhados a partir da operação real",
+  "Segurança, acesso e LGPD desde o início",
 ];
 
 const faqs: FAQItem[] = [
@@ -136,9 +168,29 @@ const faqs: FAQItem[] = [
       "Não. A proposta é reduzir esforço operacional repetitivo e liberar o time para análise, atendimento, gestão e decisão.",
   },
   {
+    question: "Preciso trocar meu ERP ou CRM?",
+    answer:
+      "Não. A proposta é automatizar sobre a stack atual sempre que isso fizer sentido para a operação.",
+  },
+  {
     question: "A automação roda sozinha?",
     answer:
       "Depende do fluxo. Em etapas críticas, a operação pode manter validação humana antes de seguir.",
+  },
+  {
+    question: "Como funciona a validação humana?",
+    answer:
+      "A automação pode parar em pontos de aprovação, exceção ou conferência antes de seguir para a próxima etapa.",
+  },
+  {
+    question: "Que tipo de processo vale automatizar primeiro?",
+    answer:
+      "Fluxos repetitivos, com alto volume, muito retrabalho ou dependência excessiva de repasse manual costumam ser o melhor começo.",
+  },
+  {
+    question: "Em quanto tempo começo a ver valor?",
+    answer:
+      "Normalmente, os primeiros ganhos aparecem na redução de tempo manual, na padronização e na queda de reprocessos.",
   },
   {
     question: "Serve para PMEs?",
@@ -241,14 +293,14 @@ function App() {
               </span>
 
               <h1 className="mt-8 text-5xl font-semibold tracking-[-0.06em] text-brand-ink sm:text-6xl lg:text-[4.9rem] lg:leading-[0.92]">
-                Menos trabalho manual.
+                Menos retrabalho.
                 <br />
-                Mais operação fluida.
+                Mais controle na operação.
               </h1>
 
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-brand-copy sm:text-xl">
-                A Pruma IA mapeia processos e implementa automações inteligentes para PMEs operarem
-                com menos retrabalho, mais integração e mais controle.
+                A Pruma IA ajuda PMEs a mapear processos e implementar automações que reduzem
+                trabalho manual, conectam sistemas e sustentam o crescimento com mais previsibilidade.
               </p>
 
               <div className="mt-9 flex flex-col gap-4 sm:flex-row">
@@ -267,8 +319,57 @@ function App() {
           </div>
         </section>
 
+        <section className="py-4 sm:py-6">
+          <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+            <motion.div
+              {...reveal}
+              className="rounded-[32px] border border-brand-line bg-white/80 px-6 py-6 shadow-[0_28px_90px_-74px_rgba(41,31,71,0.38)] backdrop-blur sm:px-8"
+            >
+              <div className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+                <div className="max-w-md">
+                  <p className="text-sm font-medium uppercase tracking-[0.26em] text-brand-muted">
+                    Estrutura do diagnóstico
+                  </p>
+                  <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-brand-ink sm:text-[2.2rem]">
+                    Um diagnóstico útil antes de qualquer automação entrar em produção.
+                  </h2>
+                  <p className="mt-4 text-sm leading-relaxed text-brand-copy">
+                    Uma leitura inicial para entender onde há retrabalho, o que vale priorizar e
+                    onde o fluxo precisa manter checkpoints humanos.
+                  </p>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {proofItems.map((item) => (
+                    <div
+                      key={item.title}
+                      className="rounded-[24px] border border-brand-line bg-brand-base/70 px-4 py-4"
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-soft text-brand-panel">
+                        {item.icon}
+                      </div>
+                      <h3 className="mt-4 text-base font-semibold tracking-tight text-brand-ink">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-brand-copy">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         <section id="beneficios" className="py-10 sm:py-14">
           <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
+            <motion.div {...reveal} className="mb-8 max-w-xl">
+              <p className="text-sm font-medium uppercase tracking-[0.26em] text-brand-muted">
+                Benefícios centrais
+              </p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-brand-ink sm:text-[2.2rem]">
+                Ganhos operacionais que aparecem sem inflar a estrutura.
+              </h2>
+            </motion.div>
             <div className="grid gap-4 lg:grid-cols-3">
               {benefits.map((item) => (
                 <motion.article
@@ -312,6 +413,7 @@ function App() {
                     {item.icon}
                   </div>
                   <h3 className="mt-5 text-2xl font-semibold tracking-tight text-brand-ink">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-copy">{item.description}</p>
                   <ul className="mt-5 space-y-3">
                     {item.bullets.map((bullet) => (
                       <li key={bullet} className="flex items-start gap-3 text-sm leading-relaxed text-brand-copy">
@@ -362,10 +464,11 @@ function App() {
               <motion.div {...reveal} className="max-w-xl">
                 <p className="text-sm font-medium uppercase tracking-[0.26em] text-white/50">Confiança</p>
                 <h2 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
-                  Implementação séria, pensada para a operação real.
+                  Automação orientada por processo, não por improviso.
                 </h2>
                 <p className="mt-5 max-w-lg text-base leading-relaxed text-white/72">
-                  A proposta da Pruma IA é automatizar com processo, segurança e critério de negócio.
+                  A Pruma IA implementa com critério operacional: integra a stack atual, preserva
+                  validações importantes e considera segurança desde o desenho do fluxo.
                 </p>
               </motion.div>
 
@@ -386,7 +489,17 @@ function App() {
 
         <section className="py-10 sm:py-14">
           <div className="mx-auto w-full max-w-4xl px-5 sm:px-6 lg:px-8">
-            <motion.div {...reveal} className="space-y-4">
+            <motion.div {...reveal} className="max-w-2xl">
+              <p className="text-sm font-medium uppercase tracking-[0.26em] text-brand-muted">FAQ</p>
+              <h2 className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-brand-ink sm:text-[2.2rem]">
+                Perguntas que costumam aparecer antes do primeiro fluxo automatizado.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-brand-copy">
+                Respostas curtas para as dúvidas mais comuns de quem avalia automação operacional com mais critério.
+              </p>
+            </motion.div>
+
+            <motion.div {...reveal} className="mt-10 space-y-4">
               {faqs.map((item, index) => {
                 const isOpen = openFaq === index;
 
@@ -437,12 +550,23 @@ function App() {
                 Diagnóstico gratuito
               </p>
               <h2 className="mx-auto mt-4 max-w-3xl text-4xl font-semibold tracking-[-0.05em] text-brand-ink sm:text-5xl">
-                Descubra onde sua operação pode ganhar eficiência com automação bem aplicada.
+                Receba clareza sobre onde automatizar primeiro.
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-brand-copy">
-                Uma leitura inicial do processo para encontrar oportunidades reais de ganho, sem
-                promessas genéricas.
+                No diagnóstico inicial, você recebe uma leitura prática de onde existe mais
+                retrabalho, o que priorizar primeiro e onde os ganhos operacionais tendem a aparecer.
               </p>
+              <div className="mx-auto mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
+                <div className="rounded-[22px] border border-brand-line bg-brand-base/70 px-4 py-4 text-sm text-brand-copy">
+                  Onde há mais retrabalho
+                </div>
+                <div className="rounded-[22px] border border-brand-line bg-brand-base/70 px-4 py-4 text-sm text-brand-copy">
+                  O que automatizar primeiro
+                </div>
+                <div className="rounded-[22px] border border-brand-line bg-brand-base/70 px-4 py-4 text-sm text-brand-copy">
+                  Onde o ganho tende a aparecer
+                </div>
+              </div>
               <div className="mt-8 flex justify-center">
                 <PrimaryButton href="mailto:contato@prumaia.com.br">Solicitar diagnóstico gratuito</PrimaryButton>
               </div>
@@ -459,7 +583,7 @@ function App() {
           <div className="max-w-lg">
             <p className="text-xl font-semibold tracking-tight text-brand-ink">Pruma IA</p>
             <p className="mt-3 text-sm leading-relaxed text-brand-copy">
-              Automação operacional com inteligência aplicada para PMEs brasileiras.
+              Implementação de automação operacional com IA para PMEs brasileiras.
             </p>
           </div>
 
@@ -500,11 +624,11 @@ function HeroVisual() {
         <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.03))] p-6 sm:p-8">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-[11px] uppercase tracking-[0.24em] text-white/45">Fluxo operacional</p>
+              <p className="text-[11px] uppercase tracking-[0.24em] text-white/45">Do processo atual ao fluxo automatizado</p>
               <p className="mt-2 text-2xl font-semibold tracking-tight text-white">
-                Automação com
+                Menos repasse manual.
                 <br />
-                mais controle
+                Mais previsibilidade.
               </p>
             </div>
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/8 text-white">
@@ -516,33 +640,48 @@ function HeroVisual() {
             <div className="rounded-[26px] bg-white/6 p-5 backdrop-blur">
               <div className="grid gap-6">
                 <WorkflowRow
-                  title="Entrada organizada"
-                  text="Dados, demandas e rotinas entram no fluxo certo."
+                  icon={<Rows size={18} weight="duotone" />}
+                  title="Mapear"
+                  text="Identificar gargalos, exceções e dependências do fluxo atual."
                 />
                 <WorkflowDivider />
                 <WorkflowRow
-                  title="Execução conectada"
-                  text="A operação avança integrada aos sistemas atuais."
+                  icon={<Circuitry size={18} weight="duotone" />}
+                  title="Integrar"
+                  text="Conectar a automação ao ERP, CRM e à rotina já existente."
                 />
                 <WorkflowDivider />
                 <WorkflowRow
-                  title="Validação crítica"
-                  text="Etapas sensíveis podem manter aprovação humana."
+                  icon={<Checks size={18} weight="duotone" />}
+                  title="Validar"
+                  text="Manter checkpoints humanos onde o processo exige critério."
                 />
               </div>
             </div>
           </div>
+
+          <p className="mt-5 text-sm leading-relaxed text-white/56">
+            Sem troca forçada de sistema e com controle nos pontos críticos.
+          </p>
         </div>
       </div>
     </div>
   );
 }
 
-function WorkflowRow({ title, text }: { title: string; text: string }) {
+function WorkflowRow({
+  title,
+  text,
+  icon,
+}: {
+  title: string;
+  text: string;
+  icon: ReactNode;
+}) {
   return (
     <div className="flex items-start gap-4">
       <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-brand-panel">
-        <LockKey size={18} weight="duotone" />
+        {icon}
       </div>
       <div>
         <p className="text-base font-medium text-white">{title}</p>
