@@ -5,23 +5,26 @@ export default {
     extend: {
       colors: {
         brand: {
-          ink: "#08101d",
-          panel: "#0d1728",
-          line: "#1c2b44",
-          accent: "#4d89ff",
-          accentSoft: "#8fc5ff",
-          cloud: "#edf4ff",
+          base: "#f6f1f7",
+          soft: "#eee6f2",
+          line: "#e4dae9",
+          panel: "#241f37",
+          ink: "#161422",
+          copy: "#5d586d",
+          muted: "#8a839a",
+          accent: "#7a65d8",
+          glow: "#c8b9ff",
         },
       },
       boxShadow: {
-        panel: "0 24px 90px -40px rgba(4, 12, 26, 0.9)",
+        panel: "0 30px 90px -60px rgba(36, 31, 55, 0.35)",
       },
       fontFamily: {
         sans: ["Outfit", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       backgroundImage: {
         hero:
-          "radial-gradient(circle at top left, rgba(77, 137, 255, 0.24), transparent 34%), radial-gradient(circle at 82% 18%, rgba(143, 197, 255, 0.14), transparent 22%), linear-gradient(180deg, rgba(8, 16, 29, 0.96), rgba(8, 16, 29, 1))",
+          "radial-gradient(circle at top left, rgba(122, 101, 216, 0.12), transparent 34%), radial-gradient(circle at 82% 18%, rgba(200, 185, 255, 0.16), transparent 22%), linear-gradient(180deg, rgba(246, 241, 247, 1), rgba(246, 241, 247, 1))",
       },
     },
   },
