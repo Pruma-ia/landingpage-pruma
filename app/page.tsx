@@ -672,7 +672,7 @@ function Problem() {
   ];
 
   return (
-    <section id="problema" className="bg-white py-20 sm:py-24 lg:py-32">
+    <section id="problema" className="bg-slate-50 py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <SectionHeader
           label="O problema"
@@ -683,7 +683,7 @@ function Problem() {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
           {stats.map((stat, i) => (
             <FadeIn key={stat.value} delay={i * 80}>
-              <div className="bg-slate-50 border border-slate-100 rounded-2xl p-7 sm:p-8 flex flex-col gap-4 h-full">
+              <div className="bg-white border border-slate-100 rounded-2xl p-7 sm:p-8 flex flex-col gap-4 h-full">
                 <div className="text-[#00B4E6]">{stat.icon}</div>
                 <div>
                   <span className="text-5xl font-bold text-[#0B1E4A]">{stat.value}</span>
@@ -941,6 +941,100 @@ function SolutionProcessos() {
   );
 }
 
+// ─── Integration Diagram ─────────────────────────────────────────────────────
+
+function IntegrationDiagram() {
+  const channels = [
+    { name: "WhatsApp Business", icon: BrandIcons.whatsapp },
+    { name: "Instagram", icon: BrandIcons.instagram },
+    { name: "Telegram", icon: BrandIcons.telegram },
+    { name: "E-mail", icon: BrandIcons.email },
+    { name: "Facebook", icon: BrandIcons.facebook },
+    { name: "Google Meet", icon: BrandIcons.googlemeet },
+  ];
+
+  const systems = [
+    { name: "Conta Azul", icon: BrandIcons.contaazul },
+    { name: "Omie", icon: BrandIcons.omie },
+    { name: "HubSpot", icon: BrandIcons.hubspot },
+    { name: "Google Sheets", icon: BrandIcons.sheets },
+    { name: "RD Station", icon: BrandIcons.rdstation },
+    { name: "+ 50 integrações", icon: null },
+  ];
+
+  return (
+    <section className="bg-white py-20 sm:py-24 lg:py-32">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
+        <SectionHeader
+          label="Arquitetura"
+          title={<>Conectado com tudo que <span className="text-[#00B4E6]">você já usa</span></>}
+          subtitle="A Pruma IA fica no centro da sua operação — integrando canais de atendimento com seus sistemas de negócio em tempo real."
+        />
+
+        <FadeIn>
+          <div className="flex flex-col lg:flex-row items-stretch rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+            {/* Left — channels */}
+            <div className="flex-1 p-7 lg:p-8">
+              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-5">
+                Canais do cliente
+              </p>
+              <div className="flex flex-col gap-2.5">
+                {channels.map((c) => (
+                  <div key={c.name} className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-2.5">
+                    <span className="shrink-0">{c.icon}</span>
+                    <span className="text-slate-700 text-sm font-medium">{c.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Center — Pruma IA hub */}
+            <div className="flex flex-col items-center justify-center px-8 py-10 bg-[#0B1E4A] lg:w-52 shrink-0 border-y lg:border-y-0 lg:border-x border-slate-700/40">
+              <Image
+                src={`${bp}/logo-branco.png`}
+                alt="Pruma IA"
+                width={120}
+                height={30}
+                className="h-7 w-auto mb-5"
+              />
+              <div className="flex flex-col items-center gap-3">
+                <span className="text-white/50 text-xs text-center leading-relaxed">
+                  Agente IA treinado<br />com seu negócio
+                </span>
+                <span className="inline-flex items-center gap-1.5 bg-[#00B4E6]/15 border border-[#00B4E6]/30 rounded-full px-3 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#00B4E6] animate-pulse" aria-hidden="true" />
+                  <span className="text-[#00B4E6] text-xs font-semibold">Online 24/7</span>
+                </span>
+              </div>
+            </div>
+
+            {/* Right — systems */}
+            <div className="flex-1 p-7 lg:p-8">
+              <p className="text-slate-400 text-[10px] font-bold uppercase tracking-widest mb-5">
+                Sistemas conectados
+              </p>
+              <div className="flex flex-col gap-2.5">
+                {systems.map((s) => (
+                  <div key={s.name} className="flex items-center gap-3 bg-slate-50 border border-slate-100 rounded-xl px-4 py-2.5">
+                    {s.icon ? (
+                      <>
+                        <span className="shrink-0">{s.icon}</span>
+                        <span className="text-slate-700 text-sm font-medium">{s.name}</span>
+                      </>
+                    ) : (
+                      <span className="text-slate-400 text-sm font-medium">{s.name}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
+
 // ─── How It Works ─────────────────────────────────────────────────────────────
 
 const HOW_STEPS = [
@@ -995,13 +1089,12 @@ const HOW_STEPS = [
 
 function HowItWorks() {
   return (
-    <section id="como-funciona" className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
+    <section id="como-funciona" className="bg-slate-50 py-20 sm:py-24 lg:py-32">
       <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
         <SectionHeader
           label="Como funciona"
           title="Do diagnóstico à operação em semanas"
           subtitle="Quatro etapas claras, sem burocracia — para que você veja resultado o quanto antes."
-          light
         />
 
         {/* Desktop — horizontal grid with arrow connectors */}
@@ -1009,24 +1102,18 @@ function HowItWorks() {
           {HOW_STEPS.map((step, i) => (
             <div key={step.number} className="flex items-start">
               <FadeIn delay={i * 100} className="flex-1 flex flex-col items-center text-center px-6">
-                {/* Step badge */}
                 <span className="text-[#00B4E6] text-xs font-bold uppercase tracking-widest mb-5">
                   {step.number}
                 </span>
-
-                {/* Icon */}
                 <div className="w-20 h-20 rounded-2xl bg-[#00B4E6]/10 border border-[#00B4E6]/20 flex items-center justify-center text-[#00B4E6] mb-6">
                   {step.icon}
                 </div>
-
-                {/* Text */}
-                <h3 className="text-white font-bold text-lg mb-3">{step.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
+                <h3 className="text-[#0B1E4A] font-bold text-lg mb-3">{step.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{step.description}</p>
               </FadeIn>
 
-              {/* Arrow between steps */}
               {i < HOW_STEPS.length - 1 && (
-                <div className="shrink-0 mt-[4.5rem] text-white/20" aria-hidden="true">
+                <div className="shrink-0 mt-[4.5rem] text-slate-300" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 6l6 6-6 6"/>
                   </svg>
@@ -1046,8 +1133,8 @@ function HowItWorks() {
               <div className="w-16 h-16 rounded-2xl bg-[#00B4E6]/10 border border-[#00B4E6]/20 flex items-center justify-center text-[#00B4E6] mb-4">
                 {step.icon}
               </div>
-              <h3 className="text-white font-bold text-base mb-2">{step.title}</h3>
-              <p className="text-white/50 text-xs leading-relaxed">{step.description}</p>
+              <h3 className="text-[#0B1E4A] font-bold text-base mb-2">{step.title}</h3>
+              <p className="text-slate-500 text-xs leading-relaxed">{step.description}</p>
             </FadeIn>
           ))}
         </div>
@@ -1211,17 +1298,17 @@ function MidCTA() {
 
 function FinalCTA() {
   return (
-    <section className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
+    <section className="bg-white py-20 sm:py-24 lg:py-32">
       <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
         <FadeIn>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 text-balance">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B1E4A] mb-6 text-balance">
             A primeira conversa é gratuita.{" "}
             <span className="text-[#00B4E6]">E já traz clareza.</span>
           </h2>
-          <p className="text-white/65 text-lg leading-relaxed mb-4">
+          <p className="text-slate-600 text-lg leading-relaxed mb-4">
             Em 30 minutos de conversa com um dos sócios da Pruma IA, você vai saber exatamente quais processos da sua empresa podem ser automatizados, o que isso representa em tempo e dinheiro — e como fazer isso acontecer.
           </p>
-          <p className="text-white/40 text-base mb-10">
+          <p className="text-slate-400 text-base mb-10">
             Sem apresentação de slides. Sem proposta genérica. Uma conversa real de negócio.
           </p>
           <a
@@ -1233,7 +1320,7 @@ function FinalCTA() {
             <IconWhatsApp />
             Agendar diagnóstico gratuito
           </a>
-          <p className="mt-5 text-white/30 text-sm">
+          <p className="mt-5 text-slate-400 text-sm">
             Resposta em até 1 hora · Sem compromisso · 100% gratuito
           </p>
         </FadeIn>
@@ -1284,6 +1371,7 @@ export default function Home() {
 
       <SolutionAtendimento />
       <SolutionProcessos />
+      <IntegrationDiagram />
       <HowItWorks />
       <MidCTA />
       <Differentials />
