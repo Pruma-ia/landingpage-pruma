@@ -12,6 +12,20 @@ Traduzir os arquivos institucionais da Pruma.ia em uma base de landing page volt
 - `Institucional_Pruma IA/IDV/Logo_VOriginal.png`
 - `Institucional_Pruma IA/IDV/Logo_VBranco.png`
 
+## Leitura visual adicional dos slides
+
+Os prints do brandbook mostram algo importante: a marca nao e apenas "azul com ciano".
+Ela opera com um sistema editorial muito controlado:
+
+- branco como superficie preferencial
+- azul marinho como bloco de contraste e autoridade
+- ciano usado como acento tecnico, nunca como banho geral
+- headlines grandes, limpas e com forte presenca
+- modulos retangulares organizados, com alinhamento rigido
+- pouco efeito, muita estrutura
+
+Em outras palavras: o valor visual da Pruma.ia vem mais de composicao, contraste e disciplina do que de efeitos.
+
 ## Leitura estrategica
 
 ### O que a marca quer comunicar
@@ -119,21 +133,49 @@ Esses numeros precisam aparecer como prova editorial, com contexto, e nao como "
 
 ### O que seguir
 
-- Base azul marinho forte
-- Ciano eletrico como unico acento
+- Branco como superficie principal da interface
+- Azul marinho forte para secoes de contraste, faixas e blocos de autoridade
+- Ciano eletrico como unico acento funcional e tecnico
 - Tipografia de titulo com carater tecnico e preciso
 - Visual limpo, firme e sem excesso de ornamento
 - Sensacao de alinhamento, engenharia e confianca
+- Layout modular, com retangulos bem definidos e respiro generoso
+- Uso de micro-rotulos numerados e pequenos em ciano para orientar secoes
+- Alternancia controlada entre secoes claras e escuras
+
+### O que os slides sugerem como linguagem formal
+
+- Titulos muito grandes, quase editoriais
+- Corpo de texto simples e bem legivel
+- Blocos laterais para valores-chave como Precisao, Adaptacao e Escala
+- Barras, filetes ou faixas em ciano como detalhe estrutural
+- Formas circulares grandes e sutis apenas como apoio de fundo, nao como protagonista
+- Mockups limpos em contextos neutros para reforcar profissionalismo e aplicabilidade
 
 ### O que evitar
 
 - Roxo generico de IA
 - Glow neon
 - Gradientes chamativos
-- Glassmorphism gratuito
+- Glassmorphism
 - Ilustracao generica de robo
 - Hero centralizado padrao de SaaS
 - Cards iguais em grade de 3 colunas
+- Sombras decorativas na marca
+- Brilhos na marca
+- Distorcao de proporcao da marca
+- Separar "Pruma" de "IA" em contextos visuais
+- Uso da marca em fundo de baixo contraste
+
+### Regras rigidas da marca extraidas dos slides
+
+- A versao clara da logo e a preferencial.
+- A versao branca deve ficar reservada para fundos escuros.
+- Deve existir area de protecao ao redor da logo equivalente a altura da letra `P`.
+- Nunca alterar cor da logo.
+- Nunca adicionar sombra, brilho ou gradiente na logo.
+- Nunca distorcer, esticar ou redesenhar a marca com outra fonte.
+- Nunca separar visualmente `Pruma` de `IA`.
 
 ### Paleta capturada
 
@@ -143,6 +185,60 @@ Esses numeros precisam aparecer como prova editorial, com contexto, e nao como "
 - Ciano Eletrico: `#00AEEF`
 - Ciano Claro: `#5CCFF5`
 - Ciano Palido: `#E0F6FE`
+
+### Regra de uso da cor
+
+- Azul Marinho 65%
+- Ciano Eletrico 25%
+- Neutros 10%
+
+Traducao pratica para a landing:
+
+- a maior parte da pagina deve parecer controlada e neutra
+- o ciano entra para orientar atencao, nao para colorir tudo
+- o azul marinho deve sustentar confianca e peso institucional
+
+### Sistema de contraste recomendado
+
+- Hero principal claro com logo colorida, texto em azul marinho e ciano em pontos de acento
+- Uma ou duas secoes escuras para elevar percepcao de autoridade e organizar a narrativa
+- Fundos muito escuros sempre com alto contraste e tipografia branca
+- Evitar pagina inteira escura; isso se afasta do comportamento preferencial mostrado no brandbook
+
+### Sistema de componentes sugerido pelos slides
+
+- caixas retangulares com borda sutil
+- paineis informativos com barra vertical ciano
+- faixas horizontais para observacoes ou regras
+- comparativos em modulos simples, sem efeito tridimensional
+- grids com espacamento amplo e leitura limpa
+
+### Materialidade da marca
+
+Os mockups do brandbook mostram a marca funcionando bem em:
+
+- tela branca
+- papelaria branca e preta
+- objetos fisicos neutros
+- ambientes claros com textura discreta
+
+Isso sugere que a landing deve parecer "aplicavel ao mundo real", nao futurista demais. Menos sci-fi, mais precisao operacional.
+
+### Tipografia e traducao para web
+
+O brandbook define:
+
+- `DIN Alternate` para logo, titulos e headlines
+- `Calibri` para texto corrido
+
+Para web, isso significa:
+
+- buscar uma fonte principal de carater geometrico, tecnico e condensado quando preciso
+- manter o corpo altamente legivel e neutro
+- evitar pares muito fashion ou muito experimentais
+
+Observacao:
+Mesmo que a fonte exata nao seja a escolhida no site, a sensacao tipografica precisa preservar `precisao`, `clareza` e `autoridade`.
 
 ## Tom de voz para a landing
 
@@ -169,6 +265,15 @@ Traducao pratica:
 6. Prova do time fundador
 7. CTA final com agendamento
 
+## Estrutura visual recomendada da landing
+
+- Navbar limpa em fundo claro, com a logo colorida preferencial
+- Hero assimetrico com texto a esquerda e composicao visual a direita
+- Blocos de valor em modulo lateral ou empilhado, inspirados nos cards de `Precisao`, `Adaptacao` e `Escala`
+- Alternancia clara entre secoes brancas e ao menos uma secao azul marinho de autoridade
+- Faixas ou divisores sutis em ciano para dar ritmo
+- Nada de excesso de blur, glow ou efeitos atmosfericos
+
 ## Hero recomendado
 
 ### Headline
@@ -193,6 +298,15 @@ Ver como funciona
 - Qualificacao automatica de leads
 - Implantacao sob medida para sua operacao
 
+### Traducao visual do hero
+
+- Fundo predominantemente claro
+- Headline em azul marinho
+- Micro-rotulo acima do titulo em ciano
+- CTA principal em azul marinho ou ciano, dependendo do contraste final
+- Apoios em linha ou em pequenos modulos tecnicos
+- Elemento visual com cara de sistema, operacao ou fluxo real; evitar arte generica de robo
+
 ## Hipotese de objecoes para tratar na pagina
 
 - "Isso vai ficar generico para meu negocio?"
@@ -207,6 +321,15 @@ Ver como funciona
 - Falar de stack tecnico cedo demais
 - Tentar vender atendimento e processos com o mesmo peso acima da dobra
 - Ficar institucional demais e perder forca de conversao
+
+## Riscos visuais nesta fase
+
+- Fazer uma landing "dark tech" demais e fugir do brandbook
+- Usar o ciano como cor dominante em vez de acento
+- Transformar a marca em algo glow, neon ou futurista
+- Usar componentes arredondados e fofos demais para uma marca que pede precisao
+- Ignorar a preferencia por superficies claras e logo colorida
+- Criar secao visualmente barulhenta quando o sistema da marca pede ordem
 
 ## Recomendacao para a proxima etapa
 
