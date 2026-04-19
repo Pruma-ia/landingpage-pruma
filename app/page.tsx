@@ -200,7 +200,7 @@ function Navbar() {
       >
         <a href="#" aria-label="Pruma IA — página inicial" className="shrink-0">
           <Image
-            src={`${bp}/logo-branco.png`}
+            src={`${bp}/logo-branco.webp`}
             alt="Pruma IA"
             width={160}
             height={40}
@@ -991,7 +991,7 @@ function IntegrationDiagram() {
             {/* Center — Pruma IA hub */}
             <div className="flex flex-col items-center justify-center px-8 py-10 bg-[#0B1E4A] lg:w-52 shrink-0 border-y lg:border-y-0 lg:border-x border-slate-700/40">
               <Image
-                src={`${bp}/logo-branco.png`}
+                src={`${bp}/logo-branco.webp`}
                 alt="Pruma IA"
                 width={120}
                 height={30}
@@ -1199,21 +1199,21 @@ function Differentials() {
 function Results() {
   const team = [
     {
-      photo: "/foto-kelly.png",
+      photo: "/foto-kelly.webp",
       name: "Kelly Lima",
       role: "Operações & Produto",
       quote: "Entendo sua operação de dentro pra fora.",
       bio: "Garante que o que a gente constrói realmente encaixa na rotina do seu negócio — e não vira mais uma ferramenta que ninguém usa.",
     },
     {
-      photo: "/foto-marcelo.png",
+      photo: "/foto-marcelo.webp",
       name: "Marcelo Mattioli",
       role: "Tecnologia",
       quote: "18 anos construindo sistemas que não quebram.",
       bio: "Já viu tudo o que pode dar errado em produção. Sabe exatamente como evitar desde o início — sem atalho, sem surpresa no final.",
     },
     {
-      photo: "/foto-diogo.png",
+      photo: "/foto-diogo.webp",
       name: "Diogo Arado",
       role: "Estratégia & Negócios",
       quote: "Já fui cliente de agência. Sei a diferença.",
@@ -1337,7 +1337,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
           <Image
-            src={`${bp}/logo-branco.png`}
+            src={`${bp}/logo-branco.webp`}
             alt="Pruma IA"
             width={140}
             height={35}
