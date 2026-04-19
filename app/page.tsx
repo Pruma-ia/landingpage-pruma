@@ -213,7 +213,7 @@ function Navbar() {
             ["Problema", "#problema"],
             ["Solução", "#solucao"],
             ["Como funciona", "#como-funciona"],
-            ["Preços", "#precos"],
+            ["O time", "#time"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -259,7 +259,7 @@ function Navbar() {
             ["Problema", "#problema"],
             ["Solução", "#solucao"],
             ["Como funciona", "#como-funciona"],
-            ["Preços", "#precos"],
+            ["O time", "#time"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -296,8 +296,6 @@ const CHAT_MESSAGES = [
   { from: "bot",    text: "✅ Confirmado! Agendamento às 14h de amanhã. Vou enviar o lembrete!" },
 ] as const;
 
-// Delay (ms) between each step: [typing before msg, msg visible duration before next]
-const STEP_DELAYS = [800, 1200, 700, 1000, 600, 1000, 700, 1200];
 
 function TypingDots() {
   return (
@@ -500,7 +498,7 @@ function Hero() {
             className={`text-lg sm:text-xl text-white/65 leading-relaxed mb-10 max-w-xl ${base} duration-500 delay-100`}
             style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)" }}
           >
-            Seu negócio atendendo clientes no WhatsApp 24 horas por dia, 7 dias por semana. Automação de atendimento e processos com IA, entregue por um time com experiência real em empresas de alto valor.
+            Enquanto você perde vendas por demora no atendimento e desperdiça horas em tarefas repetitivas, seus concorrentes já automatizaram. A Pruma IA coloca a sua empresa no mesmo nível — sem contratar mais ninguém.
           </p>
 
           <div
@@ -532,7 +530,7 @@ function Hero() {
             {[
               "Atendimento 24/7 no WhatsApp",
               "Retorno visível no 1º mês",
-              "Você não fica preso a nenhuma plataforma",
+              "Diagnóstico gratuito, sem compromisso",
             ].map((item) => (
               <div key={item} className="flex items-center gap-2 text-white/55 text-sm">
                 <span className="text-[#00B4E6]">
@@ -593,7 +591,7 @@ function Problem() {
       value: "21h",
       label: "por semana",
       description:
-        "é o tempo médio que donos de PMEs perdem em tarefas manuais e operacionais que poderiam ser automatizadas.",
+        "Responder mensagem, lançar pedido, atualizar planilha, cobrar cliente. Tudo isso pode ser feito por um agente de IA enquanto você foca no que realmente importa.",
       source: "Conta Simples / Visa",
     },
     {
@@ -601,7 +599,7 @@ function Problem() {
       value: "40%",
       label: "das PMEs",
       description:
-        "ainda dependem de planilhas e processos manuais para controlar seu negócio — sem integração, sem visibilidade.",
+        "Planilha que ninguém atualiza, processo que depende de uma pessoa só, informação que some. Enquanto isso, o cliente espera — e muitas vezes vai embora.",
       source: "Sebrae 2025",
     },
     {
@@ -609,7 +607,7 @@ function Problem() {
       value: "30%",
       label: "da receita",
       description:
-        "é perdida por empresas com baixa eficiência operacional — retrabalho, falhas de atendimento e oportunidades que escapam.",
+        "Venda que não foi feita por demora na resposta. Retrabalho por processo manual. Cliente que foi embora por falta de acompanhamento. Tudo isso some com a automação certa.",
       source: "McKinsey",
     },
   ];
@@ -619,8 +617,8 @@ function Problem() {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <SectionHeader
           label="O problema"
-          title="Sua empresa está perdendo dinheiro todos os dias"
-          subtitle="Não por falta de produto nem de equipe. Por processos que consomem tempo, energia e clientes — enquanto a concorrência já automatizou."
+          title="Reconhece alguma dessas situações?"
+          subtitle="Se você respondeu sim para pelo menos uma, a automação já está pagando por si mesma antes mesmo de começar."
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
@@ -757,57 +755,189 @@ function Solution() {
 
 // ─── How It Works ─────────────────────────────────────────────────────────────
 
+const HOW_STEPS = [
+  {
+    number: "01",
+    title: "Diagnóstico",
+    description:
+      "Mapeamos os gargalos da sua operação em uma conversa direta. Identificamos onde a automação gera mais retorno e definimos o escopo com clareza.",
+    color: "from-[#00B4E6] to-[#0099C4]",
+  },
+  {
+    number: "02",
+    title: "Construção",
+    description:
+      "Desenvolvemos as automações sob medida para o seu negócio — integrações, fluxos e agentes de IA configurados com a sua realidade.",
+    color: "from-[#0099C4] to-[#0077A3]",
+  },
+  {
+    number: "03",
+    title: "Validação",
+    description:
+      "Você testa tudo antes de ir ao ar. Ajustamos cada detalhe junto com o seu time até que o resultado esteja exatamente como esperado.",
+    color: "from-[#0077A3] to-[#005580]",
+  },
+  {
+    number: "04",
+    title: "Operação Fluida",
+    description:
+      "Com a manutenção mensal, garantimos que tudo continue funcionando, evoluindo e se integrando ao crescimento do seu negócio.",
+    color: "from-[#005580] to-[#0B1E4A]",
+  },
+] as const;
+
 function HowItWorks() {
-  const steps = [
-    {
-      number: "01",
-      title: "Diagnóstico",
-      description:
-        "Em uma conversa de alto nível, mapeamos os gargalos da sua operação, identificamos onde a automação gera mais retorno e definimos o escopo do projeto.",
-    },
-    {
-      number: "02",
-      title: "Desenvolvimento e entrega",
-      description:
-        "Construímos, testamos e entregamos as automações com acompanhamento próximo. Você valida os resultados antes do go-live.",
-    },
-    {
-      number: "03",
-      title: "Operação e evolução",
-      description:
-        "Com a mensalidade de manutenção, garantimos suporte contínuo, monitoramento, evoluções e novas integrações conforme seu negócio cresce.",
-    },
-  ];
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [activeStep, setActiveStep] = useState(-1);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+
+        if (prefersReduced) {
+          setActiveStep(HOW_STEPS.length - 1);
+          return;
+        }
+
+        HOW_STEPS.forEach((_, i) => {
+          setTimeout(() => setActiveStep(i), i * 350);
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <section id="como-funciona" className="bg-slate-50 py-20 sm:py-24 lg:py-32">
+    <section id="como-funciona" className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <SectionHeader
           label="Como funciona"
-          title="Simples, rápido e sem complicação"
-          subtitle="Do diagnóstico ao resultado em semanas — sem longas reuniões de discovery nem processos burocráticos."
+          title="Do diagnóstico à operação em semanas"
+          subtitle="Quatro etapas claras, sem burocracia — para que você veja resultado o quanto antes."
+          light
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 relative">
-          {/* Connector line (desktop) */}
-          <div
-            className="hidden sm:block absolute top-10 left-[calc(16.6%+2.5rem)] right-[calc(16.6%+2.5rem)] h-px bg-gradient-to-r from-[#00B4E6]/20 via-[#00B4E6]/50 to-[#00B4E6]/20"
-            aria-hidden="true"
-          />
+        <div ref={sectionRef}>
+          {/* Desktop timeline */}
+          <div className="hidden md:block">
+            {/* Progress line */}
+            <div className="relative flex items-start justify-between gap-0 mb-0">
+              {/* Background track */}
+              <div className="absolute top-8 left-8 right-8 h-0.5 bg-white/10" aria-hidden="true" />
+              {/* Animated fill */}
+              <div
+                className="absolute top-8 left-8 h-0.5 bg-gradient-to-r from-[#00B4E6] to-[#0099C4] transition-all duration-700 ease-out"
+                style={{
+                  right: activeStep >= HOW_STEPS.length - 1
+                    ? "2rem"
+                    : activeStep < 0
+                    ? "calc(100% - 2rem)"
+                    : `calc(${100 - ((activeStep + 1) / HOW_STEPS.length) * 100}% + 2rem)`,
+                }}
+                aria-hidden="true"
+              />
 
-          {steps.map((step, i) => (
-            <FadeIn key={step.number} delay={i * 100}>
-              <div className="flex flex-col items-start gap-5">
-                <div className="relative flex items-center justify-center w-20 h-20 bg-[#0B1E4A] rounded-2xl shrink-0">
-                  <span className="text-3xl font-bold text-[#00B4E6]">{step.number}</span>
+              {HOW_STEPS.map((step, i) => {
+                const done = i <= activeStep;
+                return (
+                  <div key={step.number} className="flex flex-col items-center flex-1">
+                    {/* Circle */}
+                    <div
+                      className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-500 ${
+                        done
+                          ? "bg-[#00B4E6] text-white shadow-lg shadow-[#00B4E6]/30 scale-110"
+                          : "bg-white/5 border border-white/20 text-white/30"
+                      }`}
+                      style={{ transitionDelay: done ? `${i * 60}ms` : "0ms" }}
+                    >
+                      {done ? (
+                        <span className="text-xl">{step.number}</span>
+                      ) : (
+                        <span className="text-base opacity-40">{step.number}</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Step cards below */}
+            <div className="grid grid-cols-4 gap-5 mt-8">
+              {HOW_STEPS.map((step, i) => {
+                const done = i <= activeStep;
+                return (
+                  <div
+                    key={step.number}
+                    className="transition-all duration-500"
+                    style={{
+                      opacity: done ? 1 : 0,
+                      transform: done ? "translateY(0)" : "translateY(12px)",
+                      transitionDelay: `${i * 350 + 200}ms`,
+                    }}
+                  >
+                    <div className={`rounded-2xl p-6 border h-full flex flex-col gap-3 ${
+                      done
+                        ? "bg-white/5 border-[#00B4E6]/20"
+                        : "bg-white/[0.02] border-white/5"
+                    }`}>
+                      <h3 className={`text-lg font-bold transition-colors duration-300 ${done ? "text-white" : "text-white/20"}`}>
+                        {step.title}
+                      </h3>
+                      <p className={`text-sm leading-relaxed transition-colors duration-300 ${done ? "text-white/55" : "text-white/10"}`}>
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobile — vertical timeline */}
+          <div className="md:hidden flex flex-col gap-0">
+            {HOW_STEPS.map((step, i) => {
+              const done = i <= activeStep;
+              const isLast = i === HOW_STEPS.length - 1;
+              return (
+                <div
+                  key={step.number}
+                  className="flex gap-4 transition-all duration-500"
+                  style={{
+                    opacity: done ? 1 : 0.2,
+                    transitionDelay: `${i * 350}ms`,
+                  }}
+                >
+                  {/* Left: circle + line */}
+                  <div className="flex flex-col items-center shrink-0">
+                    <div
+                      className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-500 ${
+                        done ? "bg-[#00B4E6] text-white shadow-lg shadow-[#00B4E6]/30" : "bg-white/10 text-white/30"
+                      }`}
+                    >
+                      {step.number}
+                    </div>
+                    {!isLast && (
+                      <div className={`w-0.5 flex-1 my-2 min-h-[2rem] transition-colors duration-700 ${done ? "bg-[#00B4E6]/40" : "bg-white/10"}`} aria-hidden="true" />
+                    )}
+                  </div>
+                  {/* Right: content */}
+                  <div className={`pb-8 ${isLast ? "pb-0" : ""}`}>
+                    <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                    <p className="text-white/55 text-sm leading-relaxed">{step.description}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-[#0B1E4A] mb-3">{step.title}</h3>
-                  <p className="text-slate-500 leading-relaxed">{step.description}</p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
@@ -869,12 +999,12 @@ function Differentials() {
 
 function Results() {
   return (
-    <section className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
+    <section id="time" className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <SectionHeader
-          label="Números que importam"
-          title="Comprometimento com resultado"
-          subtitle="Um time sênior e focado, que trabalha como se o negócio fosse nosso — porque o seu resultado é o nosso resultado."
+          label="Quem vai cuidar do seu projeto"
+          title="Time sênior, resultado garantido"
+          subtitle="Não somos uma agência genérica. Somos três sócios com décadas de experiência em empresas reais — e trabalhamos pessoalmente em cada projeto."
           light
         />
 
@@ -934,102 +1064,29 @@ function Results() {
 
 // ─── Pricing ──────────────────────────────────────────────────────────────────
 
-function Pricing() {
+// Mid-page CTA strip
+function MidCTA() {
   return (
-    <section id="precos" className="bg-slate-50 py-20 sm:py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <SectionHeader
-          label="Investimento"
-          title="Investimento sob medida para o seu negócio"
-          subtitle="O projeto é personalizado conforme a sua demanda. A manutenção garante que tudo continue funcionando e evoluindo."
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-          {/* Card Projeto */}
-          <FadeIn delay={0}>
-            <div className="bg-[#0B1E4A] rounded-2xl p-7 sm:p-8 flex flex-col gap-6 h-full">
-              <div>
-                <p className="text-[#00B4E6] text-xs font-semibold uppercase tracking-wide mb-3">
-                  Projeto de implantação
-                </p>
-                <div className="flex items-end gap-2 mb-1">
-                  <span className="text-white/60 text-lg font-medium">a partir de R$</span>
-                  <span className="text-5xl font-bold text-white tabular-nums">10.000</span>
-                </div>
-                <p className="text-white/40 text-sm">valor sob medida para o seu negócio</p>
-              </div>
-              <p className="text-white/55 text-sm leading-relaxed">
-                Cada projeto é dimensionado de acordo com a realidade da sua empresa — o volume de atendimento, os processos envolvidos e as integrações necessárias. O valor final é definido após o diagnóstico.
-              </p>
-              <ul className="space-y-2.5 flex-1">
-                {[
-                  "Diagnóstico e mapeamento de processos",
-                  "Desenvolvimento das automações",
-                  "Testes e validação com seu time",
-                  "Go-live com suporte na implantação",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-white/55 text-sm">
-                    <span className="text-[#00B4E6] mt-0.5 shrink-0"><IconCheck /></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeIn>
-
-          {/* Card Manutenção */}
-          <FadeIn delay={80}>
-            <div className="bg-white border-2 border-[#00B4E6] rounded-2xl p-7 sm:p-8 flex flex-col gap-6 relative h-full">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                <span className="bg-[#00B4E6] text-white text-xs font-bold px-4 py-1.5 rounded-full whitespace-nowrap">
-                  RECOMENDADO
-                </span>
-              </div>
-              <div>
-                <p className="text-[#0B1E4A] text-xs font-semibold uppercase tracking-wide mb-3">
-                  Manutenção mensal
-                </p>
-                <div className="flex items-end gap-2 mb-1">
-                  <span className="text-[#0B1E4A] text-lg font-medium">R$</span>
-                  <span className="text-5xl font-bold text-[#0B1E4A] tabular-nums">1.000</span>
-                  <span className="text-slate-400 text-base mb-1.5">/mês</span>
-                </div>
-                <p className="text-slate-400 text-sm">por cliente / projeto em operação</p>
-              </div>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                Operação contínua, monitoramento, evoluções e novas integrações. Garante que as automações estejam sempre funcionando e evoluindo com o seu negócio.
-              </p>
-              <ul className="space-y-2.5 flex-1">
-                {[
-                  "Suporte e monitoramento contínuo",
-                  "Evoluções e ajustes nas automações",
-                  "Novas integrações conforme a demanda",
-                  "Relatórios de desempenho mensais",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-slate-600 text-sm">
-                    <span className="text-[#00B4E6] mt-0.5 shrink-0"><IconCheck /></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </FadeIn>
-        </div>
-
-        <FadeIn className="mt-8 text-center" delay={160}>
-          <p className="text-slate-400 text-sm">
-            Quer entender se faz sentido para o seu negócio?{" "}
-            <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20um%20diagn%C3%B3stico%20gratuito%20com%20a%20Pruma%20IA."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#00B4E6] hover:underline font-medium"
-            >
-              Peça um diagnóstico gratuito.
-            </a>
+    <section className="bg-[#00B4E6] py-14 sm:py-16">
+      <FadeIn className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+        <div>
+          <p className="text-white font-bold text-xl sm:text-2xl leading-snug">
+            Quanto tempo você ainda vai gastar<br className="hidden sm:block" /> fazendo o que uma IA pode fazer por você?
           </p>
-        </FadeIn>
-      </div>
+          <p className="text-white/80 text-sm mt-2">
+            Diagnóstico gratuito — sem compromisso, sem pitch de vendas.
+          </p>
+        </div>
+        <a
+          href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20um%20diagn%C3%B3stico%20gratuito%20com%20a%20Pruma%20IA."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 active:scale-[0.97] text-[#0B1E4A] font-bold px-7 py-4 rounded-xl text-base transition-all duration-200 shrink-0 min-h-[52px]"
+        >
+          <IconWhatsApp />
+          <span className="text-[#0B1E4A]">Quero meu diagnóstico grátis</span>
+        </a>
+      </FadeIn>
     </section>
   );
 }
@@ -1042,23 +1099,26 @@ function FinalCTA() {
       <div className="max-w-3xl mx-auto px-5 sm:px-6 lg:px-8 text-center">
         <FadeIn>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 text-balance">
-            Pronto para parar de perder tempo e{" "}
-            <span className="text-[#00B4E6]">começar a escalar?</span>
+            A primeira conversa é gratuita.{" "}
+            <span className="text-[#00B4E6]">E já traz clareza.</span>
           </h2>
-          <p className="text-white/60 text-lg leading-relaxed mb-10">
-            Fale agora com um dos sócios da Pruma IA. Uma conversa direta, sem pitch comercial genérico — para entender se a automação faz sentido para o seu negócio.
+          <p className="text-white/65 text-lg leading-relaxed mb-4">
+            Em 30 minutos de conversa com um dos sócios da Pruma IA, você vai saber exatamente quais processos da sua empresa podem ser automatizados, o que isso representa em tempo e dinheiro — e como fazer isso acontecer.
+          </p>
+          <p className="text-white/40 text-base mb-10">
+            Sem apresentação de slides. Sem proposta genérica. Uma conversa real de negócio.
           </p>
           <a
-            href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA%20e%20entender%20como%20posso%20automatizar%20meu%20neg%C3%B3cio."
+            href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20agendar%20um%20diagn%C3%B3stico%20gratuito%20com%20a%20Pruma%20IA."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1ebe59] active:scale-[0.97] text-white font-bold px-9 sm:px-10 py-5 rounded-xl text-lg transition-all duration-200 min-h-[60px]"
           >
             <IconWhatsApp />
-            Falar no WhatsApp agora
+            Agendar diagnóstico gratuito
           </a>
           <p className="mt-5 text-white/30 text-sm">
-            Resposta em até 1 hora em horário comercial · Sem compromisso
+            Resposta em até 1 hora · Sem compromisso · 100% gratuito
           </p>
         </FadeIn>
       </div>
@@ -1104,11 +1164,12 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Problem />
+
       <Solution />
       <HowItWorks />
+      <MidCTA />
       <Differentials />
       <Results />
-      <Pricing />
       <FinalCTA />
       <Footer />
     </main>
