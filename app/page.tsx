@@ -584,6 +584,63 @@ function SectionHeader({
   );
 }
 
+// ─── Integrations Marquee ─────────────────────────────────────────────────────
+
+function IntegrationsMarquee() {
+  const logos = [
+    { name: "WhatsApp", icon: BrandIcons.whatsapp },
+    { name: "Instagram", icon: BrandIcons.instagram },
+    { name: "Facebook", icon: BrandIcons.facebook },
+    { name: "Telegram", icon: BrandIcons.telegram },
+    { name: "Google Meet", icon: BrandIcons.googlemeet },
+    { name: "Conta Azul", icon: BrandIcons.contaazul },
+    { name: "Omie", icon: BrandIcons.omie },
+    { name: "Bling", icon: BrandIcons.bling },
+    { name: "TOTVS", icon: BrandIcons.totvs },
+    { name: "Google Sheets", icon: BrandIcons.sheets },
+    { name: "RD Station", icon: BrandIcons.rdstation },
+    { name: "HubSpot", icon: BrandIcons.hubspot },
+    { name: "Pipedrive", icon: BrandIcons.pipedrive },
+    { name: "Asaas", icon: BrandIcons.asaas },
+    { name: "Mercado Pago", icon: BrandIcons.mercadopago },
+    { name: "Notion", icon: BrandIcons.notion },
+  ];
+  const repeated = [...logos, ...logos];
+
+  return (
+    <section className="bg-white border-y border-slate-100 py-6">
+      <p className="text-center text-slate-400 text-xs font-semibold uppercase tracking-widest mb-5">
+        Integramos com as ferramentas que você já usa
+      </p>
+      <div className="relative overflow-hidden">
+        <div
+          className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to right, white, transparent)" }}
+        />
+        <div
+          className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none"
+          style={{ background: "linear-gradient(to left, white, transparent)" }}
+        />
+
+        <div
+          className="flex items-center"
+          style={{ animation: "marquee 28s linear infinite", width: "max-content" }}
+        >
+          {repeated.map((logo, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-2.5 mx-8 shrink-0 opacity-40 grayscale hover:opacity-80 hover:grayscale-0 transition-all duration-300"
+            >
+              <span className="shrink-0">{logo.icon}</span>
+              <span className="text-slate-600 text-sm font-semibold whitespace-nowrap">{logo.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Problem ──────────────────────────────────────────────────────────────────
 
 function Problem() {
@@ -892,9 +949,8 @@ const HOW_STEPS = [
     title: "Diagnóstico",
     description:
       "Mapeamos os gargalos da sua operação em uma conversa direta. Identificamos onde a automação gera mais retorno e definimos o escopo com clareza.",
-    color: "from-[#00B4E6] to-[#0099C4]",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
       </svg>
@@ -905,9 +961,8 @@ const HOW_STEPS = [
     title: "Construção",
     description:
       "Desenvolvemos as automações sob medida para o seu negócio — integrações, fluxos e agentes de IA configurados com a sua realidade.",
-    color: "from-[#0099C4] to-[#0077A3]",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
         <line x1="12" y1="3" x2="12" y2="21"/>
       </svg>
@@ -918,9 +973,8 @@ const HOW_STEPS = [
     title: "Validação",
     description:
       "Você testa tudo antes de ir ao ar. Ajustamos cada detalhe junto com o seu time até que o resultado esteja exatamente como esperado.",
-    color: "from-[#0077A3] to-[#005580]",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
         <polyline points="22 4 12 14.01 9 11.01"/>
       </svg>
@@ -931,9 +985,8 @@ const HOW_STEPS = [
     title: "Operação Fluida",
     description:
       "Com a manutenção mensal, garantimos que tudo continue funcionando, evoluindo e se integrando ao crescimento do seu negócio.",
-    color: "from-[#005580] to-[#0B1E4A]",
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
       </svg>
     ),
@@ -941,38 +994,9 @@ const HOW_STEPS = [
 ];
 
 function HowItWorks() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [activeStep, setActiveStep] = useState(-1);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-
-        if (prefersReduced) {
-          setActiveStep(HOW_STEPS.length - 1);
-          return;
-        }
-
-        HOW_STEPS.forEach((_, i) => {
-          setTimeout(() => setActiveStep(i), i * 350);
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="como-funciona" className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8">
         <SectionHeader
           label="Como funciona"
           title="Do diagnóstico à operação em semanas"
@@ -980,128 +1004,52 @@ function HowItWorks() {
           light
         />
 
-        <div ref={sectionRef}>
-          {/* Desktop timeline */}
-          <div className="hidden md:block">
-            {/* Progress line */}
-            <div className="relative flex items-start justify-between gap-0 mb-0">
-              {/* Background track */}
-              <div className="absolute top-8 left-8 right-8 h-0.5 bg-white/10" aria-hidden="true" />
-              {/* Animated fill */}
-              <div
-                className="absolute top-8 left-8 h-0.5 bg-gradient-to-r from-[#00B4E6] to-[#0099C4] transition-all duration-700 ease-out"
-                style={{
-                  right: activeStep >= HOW_STEPS.length - 1
-                    ? "2rem"
-                    : activeStep < 0
-                    ? "calc(100% - 2rem)"
-                    : `calc(${100 - ((activeStep + 1) / HOW_STEPS.length) * 100}% + 2rem)`,
-                }}
-                aria-hidden="true"
-              />
+        {/* Desktop — horizontal grid with arrow connectors */}
+        <div className="hidden md:grid md:grid-cols-4 gap-0">
+          {HOW_STEPS.map((step, i) => (
+            <div key={step.number} className="flex items-start">
+              <FadeIn delay={i * 100} className="flex-1 flex flex-col items-center text-center px-6">
+                {/* Step badge */}
+                <span className="text-[#00B4E6] text-xs font-bold uppercase tracking-widest mb-5">
+                  {step.number}
+                </span>
 
-              {HOW_STEPS.map((step, i) => {
-                const done = i <= activeStep;
-                return (
-                  <div key={step.number} className="flex flex-col items-center flex-1">
-                    {/* Circle */}
-                    <div
-                      className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-500 ${
-                        done
-                          ? "bg-[#00B4E6] text-white shadow-lg shadow-[#00B4E6]/30 scale-110"
-                          : "bg-white/5 border border-white/20 text-white/30"
-                      }`}
-                      style={{ transitionDelay: done ? `${i * 60}ms` : "0ms" }}
-                    >
-                      {done ? (
-                        <span className="text-xl">{step.number}</span>
-                      ) : (
-                        <span className="text-base opacity-40">{step.number}</span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Step cards below */}
-            <div className="grid grid-cols-4 gap-5 mt-8">
-              {HOW_STEPS.map((step, i) => {
-                const done = i <= activeStep;
-                return (
-                  <div
-                    key={step.number}
-                    className="transition-all duration-500"
-                    style={{
-                      opacity: done ? 1 : 0,
-                      transform: done ? "translateY(0)" : "translateY(12px)",
-                      transitionDelay: `${i * 350 + 200}ms`,
-                    }}
-                  >
-                    <div className={`rounded-2xl p-6 border h-full flex flex-col gap-3 ${
-                      done
-                        ? "bg-white/5 border-[#00B4E6]/20"
-                        : "bg-white/[0.02] border-white/5"
-                    }`}>
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-1 transition-all duration-300 ${
-                        done ? "bg-[#00B4E6]/15 text-[#00B4E6]" : "bg-white/5 text-white/20"
-                      }`}>
-                        {step.icon}
-                      </div>
-                      <h3 className={`text-lg font-bold transition-colors duration-300 ${done ? "text-white" : "text-white/20"}`}>
-                        {step.title}
-                      </h3>
-                      <p className={`text-sm leading-relaxed transition-colors duration-300 ${done ? "text-white/55" : "text-white/10"}`}>
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Mobile — vertical timeline */}
-          <div className="md:hidden flex flex-col gap-0">
-            {HOW_STEPS.map((step, i) => {
-              const done = i <= activeStep;
-              const isLast = i === HOW_STEPS.length - 1;
-              return (
-                <div
-                  key={step.number}
-                  className="flex gap-4 transition-all duration-500"
-                  style={{
-                    opacity: done ? 1 : 0.2,
-                    transitionDelay: `${i * 350}ms`,
-                  }}
-                >
-                  {/* Left: circle + line */}
-                  <div className="flex flex-col items-center shrink-0">
-                    <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-500 ${
-                        done ? "bg-[#00B4E6] text-white shadow-lg shadow-[#00B4E6]/30" : "bg-white/10 text-white/30"
-                      }`}
-                    >
-                      {step.number}
-                    </div>
-                    {!isLast && (
-                      <div className={`w-0.5 flex-1 my-2 min-h-[2rem] transition-colors duration-700 ${done ? "bg-[#00B4E6]/40" : "bg-white/10"}`} aria-hidden="true" />
-                    )}
-                  </div>
-                  {/* Right: content */}
-                  <div className={`pb-8 ${isLast ? "pb-0" : ""}`}>
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-all duration-300 ${
-                      done ? "bg-[#00B4E6]/15 text-[#00B4E6]" : "bg-white/5 text-white/20"
-                    }`}>
-                      {step.icon}
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
-                    <p className="text-white/55 text-sm leading-relaxed">{step.description}</p>
-                  </div>
+                {/* Icon */}
+                <div className="w-20 h-20 rounded-2xl bg-[#00B4E6]/10 border border-[#00B4E6]/20 flex items-center justify-center text-[#00B4E6] mb-6">
+                  {step.icon}
                 </div>
-              );
-            })}
-          </div>
+
+                {/* Text */}
+                <h3 className="text-white font-bold text-lg mb-3">{step.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{step.description}</p>
+              </FadeIn>
+
+              {/* Arrow between steps */}
+              {i < HOW_STEPS.length - 1 && (
+                <div className="shrink-0 mt-[4.5rem] text-white/20" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M13 6l6 6-6 6"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile — 2×2 grid */}
+        <div className="md:hidden grid grid-cols-2 gap-8">
+          {HOW_STEPS.map((step, i) => (
+            <FadeIn key={step.number} delay={i * 80} className="flex flex-col items-center text-center">
+              <span className="text-[#00B4E6] text-xs font-bold uppercase tracking-widest mb-4">
+                {step.number}
+              </span>
+              <div className="w-16 h-16 rounded-2xl bg-[#00B4E6]/10 border border-[#00B4E6]/20 flex items-center justify-center text-[#00B4E6] mb-4">
+                {step.icon}
+              </div>
+              <h3 className="text-white font-bold text-base mb-2">{step.title}</h3>
+              <p className="text-white/50 text-xs leading-relaxed">{step.description}</p>
+            </FadeIn>
+          ))}
         </div>
       </div>
     </section>
@@ -1331,6 +1279,7 @@ export default function Home() {
     <main className="overflow-x-hidden">
       <Navbar />
       <Hero />
+      <IntegrationsMarquee />
       <Problem />
 
       <SolutionAtendimento />
