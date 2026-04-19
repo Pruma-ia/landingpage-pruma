@@ -732,9 +732,6 @@ function SolutionAtendimento() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left — copy */}
           <FadeIn>
-            <div className="inline-flex items-center gap-2 bg-[#00B4E6]/10 border border-[#00B4E6]/20 rounded-full px-4 py-1.5 mb-6">
-              <span className="text-[#00B4E6] text-xs font-bold uppercase tracking-widest">Solução 1 · Porta de entrada</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1E4A] mb-5 text-balance">
               Automação de <span className="text-[#00B4E6]">Atendimento</span>
             </h2>
@@ -852,9 +849,6 @@ function SolutionProcessos() {
 
           {/* Right — copy */}
           <FadeIn delay={120} className="order-1 lg:order-2">
-            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
-              <span className="text-white/70 text-xs font-bold uppercase tracking-widest">Solução 2 · Expansão</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-balance">
               Automação de <span className="text-[#00B4E6]">Processos</span>
             </h2>
@@ -899,6 +893,12 @@ const HOW_STEPS = [
     description:
       "Mapeamos os gargalos da sua operação em uma conversa direta. Identificamos onde a automação gera mais retorno e definimos o escopo com clareza.",
     color: "from-[#00B4E6] to-[#0099C4]",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+      </svg>
+    ),
   },
   {
     number: "02",
@@ -906,6 +906,12 @@ const HOW_STEPS = [
     description:
       "Desenvolvemos as automações sob medida para o seu negócio — integrações, fluxos e agentes de IA configurados com a sua realidade.",
     color: "from-[#0099C4] to-[#0077A3]",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        <line x1="12" y1="3" x2="12" y2="21"/>
+      </svg>
+    ),
   },
   {
     number: "03",
@@ -913,6 +919,12 @@ const HOW_STEPS = [
     description:
       "Você testa tudo antes de ir ao ar. Ajustamos cada detalhe junto com o seu time até que o resultado esteja exatamente como esperado.",
     color: "from-[#0077A3] to-[#005580]",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    ),
   },
   {
     number: "04",
@@ -920,8 +932,13 @@ const HOW_STEPS = [
     description:
       "Com a manutenção mensal, garantimos que tudo continue funcionando, evoluindo e se integrando ao crescimento do seu negócio.",
     color: "from-[#005580] to-[#0B1E4A]",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+      </svg>
+    ),
   },
-] as const;
+];
 
 function HowItWorks() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -1026,6 +1043,11 @@ function HowItWorks() {
                         ? "bg-white/5 border-[#00B4E6]/20"
                         : "bg-white/[0.02] border-white/5"
                     }`}>
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-1 transition-all duration-300 ${
+                        done ? "bg-[#00B4E6]/15 text-[#00B4E6]" : "bg-white/5 text-white/20"
+                      }`}>
+                        {step.icon}
+                      </div>
                       <h3 className={`text-lg font-bold transition-colors duration-300 ${done ? "text-white" : "text-white/20"}`}>
                         {step.title}
                       </h3>
@@ -1068,6 +1090,11 @@ function HowItWorks() {
                   </div>
                   {/* Right: content */}
                   <div className={`pb-8 ${isLast ? "pb-0" : ""}`}>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 transition-all duration-300 ${
+                      done ? "bg-[#00B4E6]/15 text-[#00B4E6]" : "bg-white/5 text-white/20"
+                    }`}>
+                      {step.icon}
+                    </div>
                     <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
                     <p className="text-white/55 text-sm leading-relaxed">{step.description}</p>
                   </div>
@@ -1135,65 +1162,69 @@ function Differentials() {
 // ─── Results ──────────────────────────────────────────────────────────────────
 
 function Results() {
+  const team = [
+    {
+      photo: "/foto-kelly.png",
+      name: "Kelly Lima",
+      role: "Operações & Produto",
+      quote: "Entendo sua operação de dentro pra fora.",
+      bio: "Garante que o que a gente constrói realmente encaixa na rotina do seu negócio — e não vira mais uma ferramenta que ninguém usa.",
+    },
+    {
+      photo: "/foto-marcelo.png",
+      name: "Marcelo Mattioli",
+      role: "Tecnologia",
+      quote: "18 anos construindo sistemas que não quebram.",
+      bio: "Já viu tudo o que pode dar errado em produção. Sabe exatamente como evitar desde o início — sem atalho, sem surpresa no final.",
+    },
+    {
+      photo: "/foto-diogo.png",
+      name: "Diogo Arado",
+      role: "Estratégia & Negócios",
+      quote: "Já fui cliente de agência. Sei a diferença.",
+      bio: "Entre um projeto que impressiona na apresentação e um que gera resultado de verdade — eu escolho o segundo. Sempre.",
+    },
+  ];
+
   return (
     <section id="time" className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <SectionHeader
-          label="Quem vai cuidar do seu projeto"
-          title="Time sênior, resultado garantido"
-          subtitle="Não somos uma agência genérica. Somos três sócios com décadas de experiência em empresas reais — e trabalhamos pessoalmente em cada projeto."
+          label="Quem cuida do seu projeto"
+          title="Você fala direto com quem faz"
+          subtitle="Nada de conta-corrente com gerente de projetos. Os três sócios trabalham pessoalmente em cada cliente — do primeiro diagnóstico até a operação rodando."
           light
         />
 
-        {/* Team */}
-        <FadeIn>
-          <div>
-            <p className="text-center text-white/40 text-xs sm:text-sm mb-10 uppercase tracking-widest">
-              Time fundador
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 max-w-3xl mx-auto">
-              {[
-                {
-                  photo: "/foto-kelly.png",
-                  name: "Kelly Lima",
-                  role: "Gestão & Operações",
-                  bio: "Engenharia Elétrica + Gestão de Produtos · 10 anos em inovação · Consultora Falconi",
-                },
-                {
-                  photo: "/foto-marcelo.png",
-                  name: "Marcelo Mattioli",
-                  role: "Tecnologia",
-                  bio: "18+ anos dev · Ex-CTO empresa R$20M · ERP, CRM, E-commerce de alta complexidade",
-                },
-                {
-                  photo: "/foto-diogo.png",
-                  name: "Diogo Arado",
-                  role: "Comercial",
-                  bio: "15+ anos gestor · Ex-COO de tech · Especialista em projetos de alto valor",
-                },
-              ].map((member, i) => (
-                <FadeIn key={member.name} delay={i * 80}>
-                  <div className="flex flex-col items-center text-center gap-3 p-6 bg-white/5 border border-white/10 rounded-2xl h-full">
-                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#00B4E6]/30 shrink-0">
-                      <Image
-                        src={`${bp}${member.photo}`}
-                        alt={`Foto de ${member.name}`}
-                        width={80}
-                        height={80}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="text-white font-semibold">{member.name}</p>
-                      <p className="text-[#00B4E6] text-xs font-medium mt-0.5">{member.role}</p>
-                    </div>
-                    <p className="text-white/40 text-xs leading-relaxed">{member.bio}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
+          {team.map((member, i) => (
+            <FadeIn key={member.name} delay={i * 100}>
+              <div className="flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-[#00B4E6]/30 transition-colors duration-300 h-full">
+                {/* Photo */}
+                <div className="relative w-full aspect-square overflow-hidden bg-white/5">
+                  <Image
+                    src={`${bp}${member.photo}`}
+                    alt={`Foto de ${member.name}`}
+                    fill
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1E4A]/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="text-white font-bold text-lg leading-tight">{member.name}</p>
+                    <p className="text-[#00B4E6] text-xs font-semibold mt-0.5">{member.role}</p>
                   </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
+                </div>
+                {/* Content */}
+                <div className="p-5 flex flex-col gap-2 flex-1">
+                  <p className="text-white font-semibold text-sm leading-snug">
+                    &ldquo;{member.quote}&rdquo;
+                  </p>
+                  <p className="text-white/50 text-sm leading-relaxed">{member.bio}</p>
+                </div>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
   );
