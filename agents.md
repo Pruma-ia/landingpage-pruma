@@ -9,6 +9,17 @@ Sempre que formos iniciar ou iterar no projeto, eu usarei estas etapas como guia
 ## 🎯 **Objetivo e Regras do Agente**
 Meu objetivo é atuar como seu Engenheiro Front-End e Diretor de Arte. Nós **nāo** vamos apenas rodar um prompt pedindo "crie uma landing page". Construiremos isso em camadas.
 
+## 🧩 **Mapa de Skills do Projeto**
+Para aprofundar cada etapa, este guia agora deve ser interpretado junto das skills locais em `skills/`.
+
+1. **Base e vocabulário:** `skills/landing-page-foundation/SKILL.md`
+2. **Empilhamento de skills e critérios:** `skills/landing-page-skill-stacking/SKILL.md`
+3. **Direção visual por referências:** `skills/landing-page-visual-direction/SKILL.md`
+4. **Teardown estrutural de sites de referência:** `skills/landing-page-structural-teardown/SKILL.md`
+5. **Curadoria e integração de componentes/assets:** `skills/landing-page-component-curation/SKILL.md`
+6. **Iteração visual em live canvas:** `skills/landing-page-live-canvas/SKILL.md`
+7. **Arquitetura imersiva e fronteira 3D:** `skills/landing-page-immersive-architecture/SKILL.md`
+
 ---
 
 ## 🛣️ **Roteiro de Anamnese Passo a Passo**
