@@ -1,5 +1,107 @@
 # Pruma.ia Landing Foundation
 
+## Foundation pack
+
+### One-line proposition
+
+Automacao de atendimento com IA para PMEs que perdem vendas por falta de resposta.
+
+### Audience
+
+- PMEs de Sao Paulo com 5 a 50 funcionarios
+- Dono operacional, gestor comercial ou decisor que sente perda de lead na rotina
+- Empresas com volume recorrente de atendimento via WhatsApp, Instagram e Facebook
+- Publico com dor clara e consciencia do problema, mas que ainda nao sabe qual arquitetura resolvera isso
+
+### Primary CTA
+
+Agendar diagnostico comercial.
+
+### Secondary CTA
+
+Solicitar analise do atendimento atual via WhatsApp.
+
+Observacao:
+na implementacao atual da landing, o CTA secundario executado acima da dobra ainda e navegacional (`Ver como funciona`), nao um segundo CTA de negocio.
+
+### Tech stack
+
+HTML + CSS + JavaScript vanilla nesta fase.
+
+Justificativa:
+
+- acelera iteracao da mensagem e da direcao visual sem overhead de framework
+- e suficiente para validar trafego pago, hierarquia, responsividade e narrativa comercial
+- mantem a base simples para depois conectar CRM, WhatsApp ou automacao real
+- migracao para Vite + React so faz sentido quando houver necessidade clara de integracoes mais ricas, estados complexos ou experimentos de interacao mais avancados
+
+### Brand tone
+
+- preciso
+- tecnico sem ser frio
+- premium editorial
+- operacional, nao futurista
+- confiavel, direto e sem promessas infladas
+
+### Visual guardrails
+
+- pagina predominantemente clara, com azul marinho sustentando contraste e autoridade
+- ciano usado como acento funcional, nunca como banho visual
+- headlines grandes, firmes e editoriais
+- modulos retangulares, alinhamento rigido e espacamento disciplinado
+- evitar hero SaaS generico, glow neon, gradiente roxo, robo ilustrado e glassmorphism
+- evitar excesso de cards equivalentes com pouca hierarquia
+
+### Required sections
+
+- hero com dor de negocio e CTA principal unico
+- faixa curta de confianca com pilares da oferta
+- bloco de dores operacionais
+- explicacao objetiva de como a implantacao funciona
+- prova de impacto ou ganhos esperados com contexto
+- diferenciais da Pruma.ia contra solucao generica
+- prova de time fundador
+- CTA final de diagnostico
+
+### Assets available
+
+- logos colorida e branca
+- brandbook institucional
+- deck comercial
+- business plan
+- copy-base de posicionamento consolidada neste documento
+
+### Open risks
+
+- a pagina ainda nao mostra prova concreta de cliente, case ou depoimento real
+- os numeros editoriais precisam de contexto ou fonte visivel na interface para nao parecerem arbitrarios
+- o CTA secundario de negocio ainda nao esta operacionalizado na dobra inicial
+- o formulario final ainda esta em modo demonstracao, sem integracao real
+- a tipografia na web ainda depende de fallbacks e nao traduz integralmente o carater do brandbook
+
+## Avaliacao da skill 1 no estado atual
+
+### O que ja esta resolvido
+
+- A proposta da oferta esta clara e orientada a negocio, nao a layout.
+- Existe um CTA principal definido e coerente com trafego pago: agendar diagnostico.
+- O publico-alvo esta bem recortado para PME com dor de atendimento e perda de lead.
+- A linguagem visual-base ja foge do repertorio generico de IA e respeita o brandbook.
+- A pagina implementada em `index.html` segue a narrativa principal do documento e nao caiu em dashboard mockup vazio.
+
+### O que ainda esta incompleto
+
+- O output exigido pela skill nao estava consolidado em um brief curto; agora esta normalizado nesta secao.
+- O CTA secundario de negocio ainda nao foi traduzido para a interface como oferta real.
+- A prova social ainda depende mais de discurso institucional do que de evidencias de mercado.
+- A secao de hero do site ainda corre um risco leve de parecer "SaaS clean" demais se comparada ao nivel de singularidade que queremos nas proximas skills.
+
+### Veredito desta etapa
+
+A skill 1 esta substancialmente resolvida em estrategia e mensagem.
+Ela ainda nao esta fechada como fundacao premium completa porque faltam prova concreta, CTA secundario de negocio e maior singularidade na traducao visual.
+Mesmo assim, a base ja esta boa o bastante para seguir para empilhamento de skills e direcao visual sem reabrir a proposta central.
+
 ## Objetivo desta etapa
 
 Traduzir os arquivos institucionais da Pruma.ia em uma base de landing page voltada para conversao de clientes vindos de trafego pago.
