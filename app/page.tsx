@@ -643,113 +643,248 @@ function Problem() {
   );
 }
 
-// ─── Solution ─────────────────────────────────────────────────────────────────
+// ─── Integration Badge ────────────────────────────────────────────────────────
 
-function Solution() {
+function IntegrationBadge({ name, color, icon }: { name: string; color: string; icon: React.ReactNode }) {
   return (
-    <section id="solucao" className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <SectionHeader
-          label="A solução"
-          title="Automação que gera resultado real"
-          subtitle="Dois caminhos complementares para transformar a operação do seu negócio — começando pelo que gera retorno mais rápido."
-          light
-        />
+    <div className="flex items-center gap-2.5 bg-white rounded-xl px-3.5 py-2.5 shadow-sm border border-slate-100">
+      <div className="shrink-0" style={{ color }}>{icon}</div>
+      <span className="text-slate-700 text-xs font-semibold whitespace-nowrap">{name}</span>
+    </div>
+  );
+}
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          {/* Card 1 */}
-          <FadeIn delay={0}>
-            <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 overflow-hidden h-full flex flex-col">
-              <div className="absolute top-0 right-0 bg-[#00B4E6] text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl">
-                PORTA DE ENTRADA
-              </div>
-              <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-[#00B4E6]/10 border border-[#00B4E6]/20 rounded-xl mb-5">
-                  <IconMessage />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  Automação de Atendimento
-                </h3>
-                <p className="text-white/60 leading-relaxed">
-                  Um agente de IA no seu WhatsApp que atende, qualifica e converte leads 24 horas por dia — sem depender da sua equipe.
-                </p>
-              </div>
-              <ul className="space-y-3 flex-1">
-                {[
-                  "Agente de IA no WhatsApp 24/7",
-                  "Qualificação automática de leads",
-                  "Agendamentos sem intervenção humana",
-                  "FAQ inteligente com contexto do seu negócio",
-                  "Transferência humanizada para a equipe",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-white/70 text-sm">
-                    <span className="text-[#00B4E6] mt-0.5 shrink-0"><IconCheck /></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-7 p-4 bg-[#00B4E6]/10 border border-[#00B4E6]/20 rounded-xl">
-                <p className="text-[#00B4E6] text-sm font-semibold">
-                  Resultado: visível no faturamento já no primeiro mês.
-                </p>
-              </div>
+// Simple brand SVG icons
+const BrandIcons = {
+  whatsapp: (
+    <svg width="18" height="18" fill="#25D366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  ),
+  instagram: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#F58529"/><stop offset="50%" stopColor="#DD2A7B"/><stop offset="100%" stopColor="#8134AF"/></linearGradient></defs>
+      <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/>
+      <circle cx="12" cy="12" r="4.5" stroke="white" strokeWidth="1.8" fill="none"/>
+      <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+    </svg>
+  ),
+  facebook: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#1877F2"/><path d="M15.5 8H13V6.5C13 5.7 13.5 5.5 14 5.5H15.5V3H13C10.8 3 10 4.3 10 6V8H8V11H10V21H13V11H15L15.5 8Z" fill="white"/></svg>
+  ),
+  telegram: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#26A5E4"/><path d="M5.5 11.5l12-5-3 13-4-4-2 2V14l8-7-9 4.5-.5-1z" fill="white" stroke="white" strokeWidth="0.5"/></svg>
+  ),
+  email: (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="4" fill="#EA4335"/><path d="M4 8l8 5 8-5V6H4v2zm0 2.5V18h16v-7.5L12 15 4 10.5z" fill="white"/></svg>
+  ),
+  googlemeet: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#00832D"/><path d="M15 8H9a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1V9a1 1 0 00-1-1z" fill="white"/><path d="M17 10l3-2v8l-3-2v-4z" fill="white"/></svg>
+  ),
+  contaazul: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0087C3"/><text x="5" y="17" fontFamily="Arial" fontWeight="bold" fontSize="13" fill="white">CA</text></svg>
+  ),
+  omie: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF6B00"/><text x="6" y="17" fontFamily="Arial" fontWeight="bold" fontSize="13" fill="white">O</text></svg>
+  ),
+  bling: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0055A5"/><text x="5.5" y="17" fontFamily="Arial" fontWeight="bold" fontSize="13" fill="white">B</text></svg>
+  ),
+  totvs: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#C5003E"/><text x="2.5" y="17" fontFamily="Arial" fontWeight="bold" fontSize="10" fill="white">TOTVS</text></svg>
+  ),
+  sheets: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0F9D58"/><rect x="5" y="7" width="14" height="2" rx="1" fill="white" opacity=".9"/><rect x="5" y="11" width="14" height="2" rx="1" fill="white" opacity=".9"/><rect x="5" y="15" width="9" height="2" rx="1" fill="white" opacity=".9"/></svg>
+  ),
+  rdstation: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#F04E23"/><text x="4.5" y="17" fontFamily="Arial" fontWeight="bold" fontSize="13" fill="white">RD</text></svg>
+  ),
+  hubspot: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#FF7A59"/><circle cx="12" cy="9" r="3" fill="white"/><path d="M6 18c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="white" strokeWidth="2" fill="none" strokeLinecap="round"/></svg>
+  ),
+  pipedrive: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#1A1A1A"/><circle cx="12" cy="10" r="4" fill="#25D366"/><rect x="10" y="14" width="4" height="6" rx="2" fill="#25D366"/></svg>
+  ),
+  asaas: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#0078D7"/><text x="5" y="17" fontFamily="Arial" fontWeight="bold" fontSize="13" fill="white">As</text></svg>
+  ),
+  mercadopago: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#00B1EA"/><text x="5.5" y="17" fontFamily="Arial" fontWeight="bold" fontSize="12" fill="white">MP</text></svg>
+  ),
+  notion: (
+    <svg width="18" height="18" viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#1a1a1a"/><text x="6" y="17" fontFamily="serif" fontWeight="bold" fontSize="14" fill="white">N</text></svg>
+  ),
+};
+
+// ─── Solution 1 — Atendimento ─────────────────────────────────────────────────
+
+function SolutionAtendimento() {
+  const channels = [
+    { name: "WhatsApp Business", color: "#25D366", icon: BrandIcons.whatsapp },
+    { name: "Instagram", color: "#DD2A7B", icon: BrandIcons.instagram },
+    { name: "Facebook", color: "#1877F2", icon: BrandIcons.facebook },
+    { name: "Telegram", color: "#26A5E4", icon: BrandIcons.telegram },
+    { name: "E-mail", color: "#EA4335", icon: BrandIcons.email },
+    { name: "Google Meet", color: "#00832D", icon: BrandIcons.googlemeet },
+  ];
+
+  return (
+    <section id="solucao" className="bg-white py-20 sm:py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left — copy */}
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 bg-[#00B4E6]/10 border border-[#00B4E6]/20 rounded-full px-4 py-1.5 mb-6">
+              <span className="text-[#00B4E6] text-xs font-bold uppercase tracking-widest">Solução 1 · Porta de entrada</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1E4A] mb-5 text-balance">
+              Automação de <span className="text-[#00B4E6]">Atendimento</span>
+            </h2>
+            <p className="text-slate-500 text-lg leading-relaxed mb-8">
+              Seu negócio respondendo clientes em segundos — 24 horas por dia, 7 dias por semana. Um agente de IA treinado com o contexto do seu negócio que atende, qualifica e converte, sem precisar de ninguém da equipe.
+            </p>
+            <ul className="space-y-4 mb-10">
+              {[
+                { title: "Atendimento 24/7 sem custo extra", desc: "Nenhuma venda perdida por demora ou fora do horário comercial." },
+                { title: "Qualificação automática de leads", desc: "O agente identifica quem tem perfil e encaminha para a equipe no momento certo." },
+                { title: "Agendamentos sem intervenção humana", desc: "O cliente escolhe o horário, confirma e recebe o lembrete — tudo automático." },
+                { title: "FAQ inteligente com contexto real", desc: "Responde dúvidas específicas do seu negócio, não respostas genéricas." },
+                { title: "Transferência humanizada para a equipe", desc: "Quando precisa de um humano, a transição é suave e com histórico completo." },
+              ].map((item) => (
+                <li key={item.title} className="flex items-start gap-3">
+                  <span className="mt-1 shrink-0 w-5 h-5 rounded-full bg-[#00B4E6]/10 flex items-center justify-center text-[#00B4E6]">
+                    <IconCheck className="w-3 h-3" />
+                  </span>
+                  <div>
+                    <span className="text-[#0B1E4A] font-semibold text-sm">{item.title} </span>
+                    <span className="text-slate-500 text-sm">{item.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="p-4 bg-[#00B4E6]/8 border border-[#00B4E6]/20 rounded-xl">
+              <p className="text-[#0B1E4A] text-sm font-semibold">Resultado esperado: mais vendas fechadas, menos tempo perdido respondendo sempre as mesmas perguntas.</p>
             </div>
           </FadeIn>
 
-          {/* Card 2 */}
-          <FadeIn delay={80}>
-            <div className="relative bg-white/5 border border-white/10 rounded-2xl p-7 sm:p-8 overflow-hidden h-full flex flex-col">
-              <div className="absolute top-0 right-0 bg-white/10 text-white/70 text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-2xl">
-                EXPANSÃO
-              </div>
-              <div className="mb-6">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-white/5 border border-white/10 rounded-xl mb-5">
-                  <IconGear />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">
-                  Automação de Processos
-                </h3>
-                <p className="text-white/60 leading-relaxed">
-                  Processos internos rodando sozinhos: onboarding, documentos, integrações com ERP e CRM — escala sem aumentar custo operacional.
-                </p>
-              </div>
-              <ul className="space-y-3 flex-1">
-                {[
-                  "Onboarding digital de clientes",
-                  "Emissão e gestão de documentos automatizada",
-                  "Integrações com ERP, CRM e planilhas",
-                  "Relatórios e dashboards automáticos",
-                  "Alertas e aprovações inteligentes",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-white/70 text-sm">
-                    <span className="text-white/40 mt-0.5 shrink-0"><IconCheck /></span>
-                    {item}
-                  </li>
+          {/* Right — integrations */}
+          <FadeIn delay={120}>
+            <div className="bg-slate-50 border border-slate-100 rounded-3xl p-8">
+              <p className="text-slate-400 text-xs font-semibold uppercase tracking-widest mb-6">Canais que integramos</p>
+              <div className="flex flex-wrap gap-3 mb-8">
+                {channels.map((c) => (
+                  <IntegrationBadge key={c.name} name={c.name} color={c.color} icon={c.icon} />
                 ))}
-              </ul>
-              <div className="mt-7 p-4 bg-white/5 border border-white/10 rounded-xl">
-                <p className="text-white/60 text-sm font-semibold">
-                  Resultado: ticket maior, menor churn e carteira fidelizada.
-                </p>
+              </div>
+              <div className="border-t border-slate-200 pt-6">
+                <p className="text-slate-400 text-xs font-semibold uppercase tracking-widest mb-4">Como funciona na prática</p>
+                <div className="space-y-3">
+                  {[
+                    { step: "1", text: "Cliente manda mensagem no WhatsApp às 22h" },
+                    { step: "2", text: "Agente responde em segundos, entende a necessidade" },
+                    { step: "3", text: "Qualifica, agenda ou encaminha — sem ninguém acordado" },
+                    { step: "4", text: "Você acorda com o negócio feito" },
+                  ].map((s) => (
+                    <div key={s.step} className="flex items-center gap-3">
+                      <span className="w-6 h-6 rounded-full bg-[#00B4E6] text-white text-xs font-bold flex items-center justify-center shrink-0">{s.step}</span>
+                      <span className="text-slate-600 text-sm">{s.text}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </FadeIn>
         </div>
+      </div>
+    </section>
+  );
+}
 
-        {/* Stack */}
-        <FadeIn className="mt-10 sm:mt-12 text-center" delay={160}>
-          <p className="text-white/40 text-sm mb-5">Stack tecnológico</p>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {["n8n", "OpenAI GPT-4", "Anthropic Claude", "Google Gemini"].map((tech) => (
-              <span
-                key={tech}
-                className="bg-white/5 border border-white/10 text-white/55 text-xs font-medium px-4 py-2 rounded-full"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </FadeIn>
+// ─── Solution 2 — Processos ───────────────────────────────────────────────────
+
+function SolutionProcessos() {
+  const platforms = [
+    { name: "Conta Azul", color: "#0087C3", icon: BrandIcons.contaazul },
+    { name: "Omie", color: "#FF6B00", icon: BrandIcons.omie },
+    { name: "Bling", color: "#0055A5", icon: BrandIcons.bling },
+    { name: "TOTVS", color: "#C5003E", icon: BrandIcons.totvs },
+    { name: "Google Sheets", color: "#0F9D58", icon: BrandIcons.sheets },
+    { name: "RD Station", color: "#F04E23", icon: BrandIcons.rdstation },
+    { name: "HubSpot", color: "#FF7A59", icon: BrandIcons.hubspot },
+    { name: "Pipedrive", color: "#25D366", icon: BrandIcons.pipedrive },
+    { name: "Asaas", color: "#0078D7", icon: BrandIcons.asaas },
+    { name: "Mercado Pago", color: "#00B1EA", icon: BrandIcons.mercadopago },
+    { name: "Notion", color: "#1a1a1a", icon: BrandIcons.notion },
+  ];
+
+  return (
+    <section className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left — integrations */}
+          <FadeIn>
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 order-2 lg:order-1">
+              <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-6">ERPs, CRMs e plataformas que integramos</p>
+              <div className="flex flex-wrap gap-2.5 mb-8">
+                {platforms.map((p) => (
+                  <IntegrationBadge key={p.name} name={p.name} color={p.color} icon={p.icon} />
+                ))}
+                <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3.5 py-2.5 border border-white/10">
+                  <span className="text-white/50 text-xs font-semibold">+ outros sob demanda</span>
+                </div>
+              </div>
+              <div className="border-t border-white/10 pt-6">
+                <p className="text-white/40 text-xs font-semibold uppercase tracking-widest mb-4">Exemplos de automação</p>
+                <div className="space-y-2.5">
+                  {[
+                    "Novo cliente → cria conta no Conta Azul + envia contrato + agenda onboarding",
+                    "Boleto vencido → dispara cobrança automática no WhatsApp",
+                    "Pedido aprovado no Bling → atualiza planilha + notifica equipe",
+                    "Lead no RD Station → qualifica + agenda reunião automaticamente",
+                  ].map((ex, i) => (
+                    <div key={i} className="flex items-start gap-2.5">
+                      <span className="text-[#00B4E6] mt-0.5 shrink-0 text-xs">→</span>
+                      <span className="text-white/55 text-xs leading-relaxed">{ex}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Right — copy */}
+          <FadeIn delay={120} className="order-1 lg:order-2">
+            <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
+              <span className="text-white/70 text-xs font-bold uppercase tracking-widest">Solução 2 · Expansão</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-5 text-balance">
+              Automação de <span className="text-[#00B4E6]">Processos</span>
+            </h2>
+            <p className="text-white/60 text-lg leading-relaxed mb-8">
+              Conectamos os sistemas que você já usa e fazemos eles trabalharem juntos, sozinhos. Sem retrabalho, sem dado perdido, sem processo que depende de uma única pessoa.
+            </p>
+            <ul className="space-y-4 mb-10">
+              {[
+                { title: "Onboarding digital de clientes", desc: "Do cadastro ao contrato assinado, tudo fluindo automaticamente." },
+                { title: "Emissão e gestão de documentos", desc: "Notas fiscais, contratos e cobranças gerados sem intervenção manual." },
+                { title: "Integrações entre ERP, CRM e planilhas", desc: "Os dados aparecem onde precisam estar, no momento certo." },
+                { title: "Relatórios e dashboards automáticos", desc: "Você acessa os números sem precisar montar nada." },
+                { title: "Alertas e aprovações inteligentes", desc: "A equipe é notificada só quando realmente precisa agir." },
+              ].map((item) => (
+                <li key={item.title} className="flex items-start gap-3">
+                  <span className="mt-1 shrink-0 w-5 h-5 rounded-full bg-[#00B4E6]/20 flex items-center justify-center text-[#00B4E6]">
+                    <IconCheck className="w-3 h-3" />
+                  </span>
+                  <div>
+                    <span className="text-white font-semibold text-sm">{item.title} </span>
+                    <span className="text-white/50 text-sm">{item.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="p-4 bg-white/5 border border-white/10 rounded-xl">
+              <p className="text-white/70 text-sm font-semibold">Resultado esperado: menos retrabalho, operação que escala sem contratar mais, e você tomando decisão com dados atualizados.</p>
+            </div>
+          </FadeIn>
+        </div>
       </div>
     </section>
   );
@@ -1167,7 +1302,8 @@ export default function Home() {
       <Hero />
       <Problem />
 
-      <Solution />
+      <SolutionAtendimento />
+      <SolutionProcessos />
       <HowItWorks />
       <MidCTA />
       <Differentials />
