@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 
+const bp = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 // ─── Animation hook ──────────────────────────────────────────────────────────
 
 function useInView(threshold = 0.15) {
@@ -198,7 +200,7 @@ function Navbar() {
       >
         <a href="#" aria-label="Pruma IA — página inicial" className="shrink-0">
           <Image
-            src="/logo-branco.png"
+            src={`${bp}/logo-branco.png`}
             alt="Pruma IA"
             width={160}
             height={40}
@@ -1039,7 +1041,7 @@ function Results() {
                   <div className="flex flex-col items-center text-center gap-3 p-6 bg-white/5 border border-white/10 rounded-2xl h-full">
                     <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-[#00B4E6]/30 shrink-0">
                       <Image
-                        src={member.photo}
+                        src={`${bp}${member.photo}`}
                         alt={`Foto de ${member.name}`}
                         width={80}
                         height={80}
@@ -1134,7 +1136,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
           <Image
-            src="/logo-branco.png"
+            src={`${bp}/logo-branco.png`}
             alt="Pruma IA"
             width={140}
             height={35}
