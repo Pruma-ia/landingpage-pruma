@@ -514,7 +514,7 @@ function Hero() {
             style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(12px)" }}
           >
             <span className="w-2 h-2 rounded-full bg-[#00B4E6] animate-pulse" aria-hidden="true" />
-            <span className="text-[#00B4E6] text-sm font-medium">Automação com IA para sua empresa crescer</span>
+            <span className="text-[#00B4E6] text-xs sm:text-sm font-medium whitespace-nowrap">Automação com IA para empresas</span>
           </div>
 
           <h1
@@ -540,14 +540,14 @@ function Hero() {
               href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 bg-[#00B4E6] hover:bg-[#0099C4] active:scale-[0.97] text-white font-semibold px-7 py-4 rounded-xl text-base transition-all duration-200 min-h-[52px]"
+              className="inline-flex items-center justify-center gap-3 bg-[#00B4E6] hover:bg-[#0099C4] active:scale-[0.97] text-white font-semibold px-7 py-3 sm:py-4 rounded-xl text-base transition-all duration-200 min-h-[48px]"
             >
               <IconWhatsApp />
               Quero automatizar meu negócio
             </a>
             <a
               href="#como-funciona"
-              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 active:scale-[0.97] text-white font-medium px-7 py-4 rounded-xl text-base transition-all duration-200 min-h-[52px]"
+              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 active:scale-[0.97] text-white font-medium px-7 py-3 sm:py-4 rounded-xl text-base transition-all duration-200 min-h-[48px]"
             >
               Ver como funciona
               <IconArrowRight />
@@ -558,7 +558,7 @@ function Hero() {
             href="https://app.pruma.io/register"
             target="_blank"
             rel="noopener noreferrer"
-            className={`-mt-1 text-sm text-white/50 hover:text-white/80 transition-colors duration-200 inline-flex items-center gap-1.5 ${base} duration-500 delay-150`}
+            className={`mt-4 text-sm text-white/50 hover:text-white/80 transition-colors duration-200 inline-flex items-center gap-1.5 ${base} duration-500 delay-150`}
             style={{ opacity: visible ? 1 : 0 }}
           >
             Ou crie sua conta grátis
