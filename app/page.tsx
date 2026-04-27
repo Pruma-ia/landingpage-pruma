@@ -229,7 +229,7 @@ function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="https://app.pruma.io"
+            href="https://app.pruma.io/login"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center text-sm font-medium text-white/80 hover:text-white border border-white/30 hover:border-white/60 px-4 py-2.5 rounded-lg transition-colors duration-200 min-h-[44px]"
@@ -283,7 +283,7 @@ function Navbar() {
             </a>
           ))}
           <a
-            href="https://app.pruma.io"
+            href="https://app.pruma.io/login"
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
@@ -545,7 +545,7 @@ function Hero() {
           </div>
 
           <a
-            href="https://app.pruma.io/signup"
+            href="https://app.pruma.io/register"
             target="_blank"
             rel="noopener noreferrer"
             className={`-mt-1 text-sm text-white/50 hover:text-white/80 transition-colors duration-200 inline-flex items-center gap-1.5 ${base} duration-500 delay-150`}
