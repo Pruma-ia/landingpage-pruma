@@ -150,9 +150,9 @@ function IconLock() {
   );
 }
 
-function IconArrowRight() {
+function IconArrowRight({ className = "w-5 h-5" }: { className?: string }) {
   return (
-    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
     </svg>
   );
@@ -234,7 +234,7 @@ function Navbar() {
             rel="noopener noreferrer"
             className="inline-flex items-center text-sm font-medium text-white/80 hover:text-white border border-white/30 hover:border-white/60 px-4 py-2.5 rounded-lg transition-colors duration-200 min-h-[44px]"
           >
-            Acessar sistema
+            Entrar
           </a>
           <a
             href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
@@ -289,7 +289,7 @@ function Navbar() {
             onClick={closeMenu}
             className="inline-flex items-center justify-center text-white/80 font-medium border border-white/30 px-5 py-3.5 rounded-lg mt-3"
           >
-            Acessar sistema
+            Entrar
           </a>
           <a
             href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
@@ -544,8 +544,19 @@ function Hero() {
             </a>
           </div>
 
+          <a
+            href="https://app.pruma.io/signup"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`-mt-1 text-sm text-white/50 hover:text-white/80 transition-colors duration-200 inline-flex items-center gap-1.5 ${base} duration-500 delay-150`}
+            style={{ opacity: visible ? 1 : 0 }}
+          >
+            Ou crie sua conta grátis
+            <IconArrowRight className="w-3.5 h-3.5" />
+          </a>
+
           <div
-            className={`mt-12 flex flex-wrap gap-x-6 gap-y-3 ${base} duration-500 delay-200`}
+            className={`mt-8 flex flex-wrap gap-x-6 gap-y-3 ${base} duration-500 delay-200`}
             style={{ opacity: visible ? 1 : 0 }}
           >
             {[
