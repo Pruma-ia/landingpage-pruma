@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
-const isProd = process.env.NODE_ENV === "production";
-const BASE_PATH = isProd ? "/landingpage-pruma" : "";
+const BASE_PATH = process.env.BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
   output: "export",
