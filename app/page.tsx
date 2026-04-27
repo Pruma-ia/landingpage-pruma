@@ -982,6 +982,256 @@ function SolutionProcessos() {
   );
 }
 
+// ─── Approvals Feature ────────────────────────────────────────────────────────
+
+type ApprovalMsg =
+  | { from: "bot"; kind: "notify"; text: string; btn: string }
+  | { from: "bot"; kind: "detail"; title: string; desc: string; file: string; note: string }
+  | { from: "bot"; kind: "text"; text: string }
+  | { from: "manager"; kind: "text"; text: string }
+  | { from: "manager"; kind: "action"; comment: string; action: string };
+
+const APPROVAL_MSGS: ApprovalMsg[] = [
+  { from: "bot", kind: "notify", text: "Você tem uma nova aprovação pendente.", btn: "Iniciar" },
+  { from: "manager", kind: "text", text: "Iniciar" },
+  {
+    from: "bot",
+    kind: "detail",
+    title: "Relatório Financeiro Q1",
+    desc: "João Silva · R$ 9.300,00 · 26/04/2026",
+    file: "relatorio-q1-2026.xlsx",
+    note: "Adicione um direcionamento e escolha a ação.",
+  },
+  { from: "manager", kind: "action", comment: "Aprovado. Seguir conforme proposto.", action: "Aprovar" },
+  { from: "bot", kind: "text", text: "✅ Aprovação registrada! Equipe notificada automaticamente." },
+];
+
+function ApprovalsVisual() {
+  const [visibleCount, setVisibleCount] = useState(0);
+  const [typing, setTyping] = useState(false);
+  const [approved, setApproved] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function run() {
+      while (!cancelled) {
+        setVisibleCount(0);
+        setTyping(false);
+        setApproved(false);
+        await pause(700);
+        for (let i = 0; i < APPROVAL_MSGS.length; i++) {
+          if (cancelled) return;
+          const msg = APPROVAL_MSGS[i];
+          if (msg.from === "bot") {
+            setTyping(true);
+            await pause(900);
+            if (cancelled) return;
+            setTyping(false);
+          } else {
+            await pause(500);
+          }
+          if (cancelled) return;
+          setVisibleCount((c) => c + 1);
+          if (i === APPROVAL_MSGS.length - 1) {
+            setApproved(true);
+            await pause(4500);
+          } else {
+            await pause(1300);
+          }
+        }
+      }
+    }
+    function pause(ms: number) { return new Promise<void>((r) => setTimeout(r, ms)); }
+    run();
+    return () => { cancelled = true; };
+  }, []);
+
+  const WA_ICON_PATH = "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z";
+
+  return (
+    <div className="w-full max-w-[340px] mx-auto lg:mx-0 flex flex-col gap-3">
+      {/* Status mini-card */}
+      <div className={`flex items-center justify-between rounded-xl px-4 py-3 border transition-all duration-500 ${
+        approved ? "bg-green-50 border-green-200" : "bg-white border-slate-200"
+      }`}>
+        <div className="flex items-center gap-3">
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 ${
+            approved ? "bg-green-100" : "bg-amber-100"
+          }`}>
+            {approved ? (
+              <IconCheck className="w-4 h-4 text-green-600" />
+            ) : (
+              <svg className="w-4 h-4 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            )}
+          </div>
+          <div>
+            <p className="text-slate-800 text-sm font-semibold">Relatório Financeiro Q1</p>
+            <p className="text-slate-400 text-xs">R$ 9.300,00 · João Silva</p>
+          </div>
+        </div>
+        <span className={`text-xs font-semibold px-2.5 py-1 rounded-full transition-all duration-500 ${
+          approved ? "bg-green-100 text-green-700" : "bg-amber-100 text-amber-700"
+        }`}>
+          {approved ? "Aprovada" : "Pendente"}
+        </span>
+      </div>
+
+      {/* WhatsApp chat */}
+      <div className="rounded-2xl overflow-hidden shadow-xl border border-slate-200">
+        <div className="bg-[#075E54] px-4 py-3 flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full bg-[#25D366] flex items-center justify-center shrink-0">
+            <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d={WA_ICON_PATH} />
+            </svg>
+          </div>
+          <div>
+            <p className="text-white text-sm font-semibold leading-none">Pruma IA</p>
+            <p className="text-white/70 text-xs mt-0.5">Aprovações</p>
+          </div>
+        </div>
+
+        <div
+          className="px-3 py-4 flex flex-col gap-2 min-h-[200px]"
+          style={{ backgroundColor: "#E5DDD5" }}
+          aria-live="polite"
+          aria-label="Simulação de aprovação via WhatsApp"
+        >
+          {APPROVAL_MSGS.slice(0, visibleCount).map((msg, i) => (
+            <div
+              key={i}
+              className={`flex ${msg.from === "manager" ? "justify-end" : "justify-start"}`}
+              style={{ animation: "msgIn 250ms cubic-bezier(0.16,1,0.3,1) both" }}
+            >
+              {msg.from === "bot" && msg.kind === "notify" && (
+                <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm max-w-[88%] overflow-hidden">
+                  <div className="px-3.5 pt-3 pb-2">
+                    <p className="text-slate-700 text-[13px] leading-relaxed">{msg.text}</p>
+                  </div>
+                  <div className="border-t border-slate-100">
+                    <p className="w-full text-center text-[#0B1E4A] text-[13px] font-semibold py-2.5 px-3">
+                      ▶ {msg.btn}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {msg.from === "bot" && msg.kind === "detail" && (
+                <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm max-w-[90%] overflow-hidden">
+                  <div className="bg-[#0B1E4A] px-3 py-2">
+                    <p className="text-white text-[11px] font-bold uppercase tracking-wide">📄 Aprovação</p>
+                  </div>
+                  <div className="px-3 py-2.5">
+                    <p className="text-slate-800 text-[13px] font-semibold">{msg.title}</p>
+                    <p className="text-slate-500 text-[11px] mt-0.5">{msg.desc}</p>
+                    <div className="mt-2 flex items-center gap-1.5 text-[11px] text-slate-500">
+                      <svg className="w-3 h-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                      </svg>
+                      {msg.file}
+                    </div>
+                    <p className="text-slate-400 text-[11px] mt-2 leading-relaxed">{msg.note}</p>
+                  </div>
+                </div>
+              )}
+
+              {msg.from === "bot" && msg.kind === "text" && (
+                <span className="text-[13px] px-3.5 py-2 max-w-[82%] leading-relaxed shadow-sm rounded-2xl bg-white text-slate-700 rounded-tl-sm">
+                  {msg.text}
+                </span>
+              )}
+
+              {msg.from === "manager" && msg.kind === "text" && (
+                <span className="text-[13px] px-3.5 py-2 max-w-[82%] leading-relaxed shadow-sm rounded-2xl bg-[#DCF8C6] text-slate-800 rounded-tr-sm">
+                  {msg.text}
+                </span>
+              )}
+
+              {msg.from === "manager" && msg.kind === "action" && (
+                <div className="flex flex-col items-end gap-1.5">
+                  <span className="text-[13px] px-3.5 py-2 max-w-[82%] leading-relaxed shadow-sm rounded-2xl bg-[#DCF8C6] text-slate-800 rounded-tr-sm">
+                    {msg.comment}
+                  </span>
+                  <span className="text-[13px] px-3.5 py-2 leading-relaxed shadow-sm rounded-2xl bg-[#25D366] text-white font-semibold rounded-tr-sm">
+                    ✅ {msg.action}
+                  </span>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {typing && (
+            <div className="flex justify-start" style={{ animation: "msgIn 200ms ease both" }}>
+              <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm px-3 py-2.5 flex items-center gap-1">
+                {[0, 1, 2].map((j) => (
+                  <span
+                    key={j}
+                    className="w-1.5 h-1.5 rounded-full bg-slate-400"
+                    style={{ animation: "typingBounce 1.2s ease-in-out infinite", animationDelay: `${j * 0.2}s` }}
+                    aria-hidden="true"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ApprovalsFeature() {
+  return (
+    <section className="bg-slate-50 py-20 sm:py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 bg-[#25D366]/10 border border-[#25D366]/25 rounded-full px-3.5 py-1.5 mb-6">
+              <svg className="w-4 h-4" fill="#25D366" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              <span className="text-[#128C7E] text-xs font-semibold">Fluxo de aprovação</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0B1E4A] mb-5 text-balance">
+              Gestor aprova pelo <span className="text-[#00B4E6]">WhatsApp,</span> de onde estiver
+            </h2>
+            <p className="text-slate-500 text-lg leading-relaxed mb-8">
+              Quando um documento precisa de aprovação, o responsável recebe uma notificação direta no WhatsApp com todos os detalhes. Um comentário e um toque — a Pruma cuida do resto.
+            </p>
+            <ul className="space-y-4 mb-10">
+              {[
+                { title: "NFs, contratos e relatórios aprovados pelo celular", desc: "Sem precisar abrir computador ou acessar nenhum sistema." },
+                { title: "Histórico completo com auditoria", desc: "Registro de quem aprovou, quando e com qual direcionamento." },
+                { title: "Rejeição com justificativa", desc: "O solicitante recebe o motivo e pode corrigir e reenviar." },
+                { title: "Sistemas atualizados automaticamente", desc: "Após a aprovação, ERP, planilhas e notificações são acionados na hora." },
+                { title: "Empresa funcionando mesmo com gestor fora", desc: "Processos não travam por falta de quem aprove presencialmente." },
+              ].map((item) => (
+                <li key={item.title} className="flex items-start gap-3">
+                  <span className="mt-1 shrink-0 w-5 h-5 rounded-full bg-[#00B4E6]/10 flex items-center justify-center text-[#00B4E6]">
+                    <IconCheck className="w-3 h-3" />
+                  </span>
+                  <div>
+                    <span className="text-[#0B1E4A] font-semibold text-sm">{item.title} </span>
+                    <span className="text-slate-500 text-sm">{item.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="p-4 bg-[#00B4E6]/8 border border-[#00B4E6]/20 rounded-xl">
+              <p className="text-[#0B1E4A] text-sm font-semibold">Resultado esperado: processos fluindo sem gargalos de aprovação — mesmo quando o gestor está viajando, em reunião ou fora do escritório.</p>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={120} className="flex justify-center lg:justify-end">
+            <ApprovalsVisual />
+          </FadeIn>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Integration Diagram ─────────────────────────────────────────────────────
 
 function IntegrationDiagram() {
@@ -1412,6 +1662,7 @@ export default function Home() {
 
       <SolutionAtendimento />
       <SolutionProcessos />
+      <ApprovalsFeature />
       <IntegrationDiagram />
       <HowItWorks />
       <MidCTA />
