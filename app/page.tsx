@@ -181,7 +181,8 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
+    const handler = () => setScrolled(window.scrollY > 1);
+    handler();
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
