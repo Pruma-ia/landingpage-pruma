@@ -247,7 +247,7 @@ function Navbar() {
             Entrar
           </a>
           <a
-            href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
+            href="https://wa.me/5511978425448?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#00B4E6] hover:bg-[#0099C4] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200 min-h-[44px]"
@@ -302,7 +302,7 @@ function Navbar() {
             Entrar
           </a>
           <a
-            href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
+            href="https://wa.me/5511978425448?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
@@ -538,7 +538,7 @@ function Hero() {
             style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(16px)" }}
           >
             <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
+              href="https://wa.me/5511978425448?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 bg-[#00B4E6] hover:bg-[#0099C4] active:scale-[0.97] text-white font-semibold px-7 py-3 sm:py-4 rounded-xl text-base transition-all duration-200 min-h-[48px]"
@@ -1572,7 +1572,7 @@ function MidCTA() {
           </p>
         </div>
         <a
-          href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20um%20diagn%C3%B3stico%20gratuito%20com%20a%20Pruma%20IA."
+          href="https://wa.me/5511978425448?text=Ol%C3%A1!%20Quero%20um%20diagn%C3%B3stico%20gratuito%20com%20a%20Pruma%20IA."
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2.5 bg-white hover:bg-slate-50 active:scale-[0.97] text-[#0B1E4A] font-bold px-7 py-4 rounded-xl text-base transition-all duration-200 shrink-0 min-h-[52px]"
@@ -1603,7 +1603,7 @@ function FinalCTA() {
             Sem apresentação de slides. Sem proposta genérica. Uma conversa real de negócio.
           </p>
           <a
-            href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20agendar%20um%20diagn%C3%B3stico%20gratuito%20com%20a%20Pruma%20IA."
+            href="https://wa.me/5511978425448?text=Ol%C3%A1!%20Quero%20agendar%20um%20diagn%C3%B3stico%20gratuito%20com%20a%20Pruma%20IA."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1ebe59] active:scale-[0.97] text-white font-bold px-9 sm:px-10 py-5 rounded-xl text-lg transition-all duration-200 min-h-[60px]"

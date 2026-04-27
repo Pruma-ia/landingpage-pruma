@@ -108,10 +108,10 @@ Variável de ambiente usada no build:
 |---------|-----|
 | App (login) | `https://app.pruma.io/login` |
 | App (cadastro) | `https://app.pruma.io/register` |
-| WhatsApp CTA | `https://wa.me/5511999999999?text=...` |
+| WhatsApp CTA | `https://wa.me/5511978425448?text=...` |
 | Contato | `contato@prumaia.com.br` |
 
-**Número do WhatsApp (`5511999999999`) é placeholder** — atualizar antes de ir ao ar com o número real.
+**Número do WhatsApp:** `5511978425448` (+55 11 97842-5448) — número real da Pruma.
 
 ---
 
