@@ -543,7 +543,7 @@ function Hero() {
               className="inline-flex items-center justify-center gap-3 bg-[#00B4E6] hover:bg-[#0099C4] active:scale-[0.97] text-white font-semibold px-7 py-3 sm:py-4 rounded-xl text-base transition-all duration-200 min-h-[48px]"
             >
               <IconWhatsApp />
-              Quero automatizar meu negócio
+              Automatizar meu negócio
             </a>
             <a
               href="#como-funciona"
