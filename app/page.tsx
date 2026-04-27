@@ -189,9 +189,18 @@ function Navbar() {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   return (
+    <>
+      {/* Backdrop overlay when mobile menu is open */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 md:hidden"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
+      )}
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#0B1E4A]/95 backdrop-blur-md shadow-lg" : "bg-transparent"
+        scrolled || menuOpen ? "bg-[#0B1E4A]/95 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
       <nav
@@ -263,7 +272,7 @@ function Navbar() {
       <div
         id="mobile-menu"
         className={`md:hidden bg-[#0B1E4A] border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${
-          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-5 py-4 flex flex-col gap-1">
@@ -304,6 +313,7 @@ function Navbar() {
         </div>
       </div>
     </header>
+    </>
   );
 }
 
