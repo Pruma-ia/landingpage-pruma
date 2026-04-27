@@ -227,15 +227,25 @@ function Navbar() {
           ))}
         </div>
 
-        <a
-          href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-2 bg-[#00B4E6] hover:bg-[#0099C4] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200 min-h-[44px]"
-        >
-          <IconWhatsApp />
-          Falar com especialista
-        </a>
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="https://app.pruma.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-sm font-medium text-white/80 hover:text-white border border-white/30 hover:border-white/60 px-4 py-2.5 rounded-lg transition-colors duration-200 min-h-[44px]"
+          >
+            Acessar sistema
+          </a>
+          <a
+            href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#00B4E6] hover:bg-[#0099C4] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200 min-h-[44px]"
+          >
+            <IconWhatsApp />
+            Falar com especialista
+          </a>
+        </div>
 
         {/* Mobile menu button */}
         <button
@@ -273,11 +283,20 @@ function Navbar() {
             </a>
           ))}
           <a
+            href="https://app.pruma.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMenu}
+            className="inline-flex items-center justify-center text-white/80 font-medium border border-white/30 px-5 py-3.5 rounded-lg mt-3"
+          >
+            Acessar sistema
+          </a>
+          <a
             href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20conhecer%20a%20Pruma%20IA."
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMenu}
-            className="inline-flex items-center justify-center gap-2 bg-[#00B4E6] text-white font-semibold px-5 py-3.5 rounded-lg mt-3"
+            className="inline-flex items-center justify-center gap-2 bg-[#00B4E6] text-white font-semibold px-5 py-3.5 rounded-lg mt-2"
           >
             <IconWhatsApp />
             Falar com especialista
