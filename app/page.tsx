@@ -225,7 +225,6 @@ function Navbar() {
             ["Problema", "#problema"],
             ["Solução", "#solucao"],
             ["Como funciona", "#como-funciona"],
-            ["O time", "#time"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -281,7 +280,6 @@ function Navbar() {
             ["Problema", "#problema"],
             ["Solução", "#solucao"],
             ["Como funciona", "#como-funciona"],
-            ["O time", "#time"],
           ].map(([label, href]) => (
             <a
               key={href}
@@ -1485,77 +1483,6 @@ function Differentials() {
   );
 }
 
-// ─── Results ──────────────────────────────────────────────────────────────────
-
-function Results() {
-  const team = [
-    {
-      photo: "/foto-kelly.webp",
-      name: "Kelly Lima",
-      role: "Operações & Produto",
-      quote: "Entendo sua operação de dentro pra fora.",
-      bio: "Garante que o que a gente constrói realmente encaixa na rotina do seu negócio — e não vira mais uma ferramenta que ninguém usa.",
-    },
-    {
-      photo: "/foto-marcelo.webp",
-      name: "Marcelo Mattioli",
-      role: "Tecnologia",
-      quote: "18 anos construindo sistemas que não quebram.",
-      bio: "Já viu tudo o que pode dar errado em produção. Sabe exatamente como evitar desde o início — sem atalho, sem surpresa no final.",
-    },
-    {
-      photo: "/foto-diogo.webp",
-      name: "Diogo Arado",
-      role: "Estratégia & Negócios",
-      quote: "Já fui cliente de agência. Sei a diferença.",
-      bio: "Entre um projeto que impressiona na apresentação e um que gera resultado de verdade — eu escolho o segundo. Sempre.",
-    },
-  ];
-
-  return (
-    <section id="time" className="bg-[#0B1E4A] py-20 sm:py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <SectionHeader
-          label="Quem cuida do seu projeto"
-          title="Você fala direto com quem faz"
-          subtitle="Nada de conta-corrente com gerente de projetos. Os três sócios trabalham pessoalmente em cada cliente — do primeiro diagnóstico até a operação rodando."
-          light
-        />
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-4xl mx-auto">
-          {team.map((member, i) => (
-            <FadeIn key={member.name} delay={i * 100}>
-              <div className="flex flex-col bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-[#00B4E6]/30 transition-colors duration-300 h-full">
-                {/* Photo */}
-                <div className="relative w-full aspect-square overflow-hidden bg-white/5">
-                  <Image
-                    src={`${bp}${member.photo}`}
-                    alt={`Foto de ${member.name}`}
-                    fill
-                    className="object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1E4A]/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="text-white font-bold text-lg leading-tight">{member.name}</p>
-                    <p className="text-[#00B4E6] text-xs font-semibold mt-0.5">{member.role}</p>
-                  </div>
-                </div>
-                {/* Content */}
-                <div className="p-5 flex flex-col gap-2 flex-1">
-                  <p className="text-white font-semibold text-sm leading-snug">
-                    &ldquo;{member.quote}&rdquo;
-                  </p>
-                  <p className="text-white/50 text-sm leading-relaxed">{member.bio}</p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ─── Pricing ──────────────────────────────────────────────────────────────────
 
 // Mid-page CTA strip
@@ -1667,7 +1594,6 @@ export default function Home() {
       <HowItWorks />
       <MidCTA />
       <Differentials />
-      <Results />
       <FinalCTA />
       <Footer />
     </main>
