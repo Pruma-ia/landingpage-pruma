@@ -1,0 +1,302 @@
+{
+  "name": "Pruma IA — Atendimento WhatsApp",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chatwoot-pruma",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "n1",
+      "name": "Chatwoot Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300],
+      "webhookId": "chatwoot-pruma"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "ok",
+        "options": {}
+      },
+      "id": "n2",
+      "name": "Respond 200",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [420, 140]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose"
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "message_created",
+              "operator": { "type": "string", "operation": "equals" }
+            },
+            {
+              "id": "c2",
+              "leftValue": "={{ $json.body.message_type }}",
+              "rightValue": "incoming",
+              "operator": { "type": "string", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "n3",
+      "name": "É mensagem do cliente?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [420, 300]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const body = $json.body;\nconst labels = body.conversation?.labels || [];\nconst botPaused = labels.includes('humano');\nreturn [{ json: { body, botPaused } }];"
+      },
+      "id": "n4",
+      "name": "Verificar bot ativo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [640, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c3",
+              "leftValue": "={{ $json.botPaused }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "n5",
+      "name": "Bot pausado?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [860, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "=https://chatwoot-chatwoot.1nzdmi.easypanel.host/api/v1/accounts/2/conversations/{{ $json.body.conversation.id }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "m5oG8mUTevawjQWN7BTzwXcW"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "n6",
+      "name": "Buscar histórico",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 380]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const webhookBody = $('Chatwoot Webhook').first().json.body;\nconst historyData = $input.first().json;\n\nconst conversationId = webhookBody.conversation.id;\nconst currentMessage = webhookBody.content;\nconst contactName = webhookBody.sender?.name || 'cliente';\nconst currentSourceId = webhookBody.source_id;\n\nconst allMessages = historyData.payload || [];\n\nconst incomingOnly = allMessages\n  .filter(m => m.content && m.content.trim() && m.message_type === 0);\n\nconst sorted = allMessages\n  .filter(m => m.content && m.content.trim() && m.message_type !== 2)\n  .sort((a, b) => a.created_at - b.created_at)\n  .slice(-20);\n\n// Se chegou msg mais nova de cliente após esta, aborta\nif (currentSourceId && incomingOnly.length > 0) {\n  const lastIncoming = incomingOnly.sort((a, b) => b.created_at - a.created_at)[0];\n  if (lastIncoming.source_id && lastIncoming.source_id !== currentSourceId) {\n    return [];\n  }\n}\n\nconst messages = [];\nfor (const m of sorted) {\n  const role = m.message_type === 0 ? 'user' : 'model';\n  const last = messages[messages.length - 1];\n  if (last && last.role === role) {\n    last.parts[0].text += '\\n' + m.content;\n  } else {\n    messages.push({ role, parts: [{ text: m.content }] });\n  }\n}\n\nwhile (messages.length > 0 && messages[0].role !== 'user') {\n  messages.shift();\n}\n\nif (messages.length === 0) {\n  messages.push({ role: 'user', parts: [{ text: currentMessage }] });\n}\n\nreturn [{ json: { conversationId, contactName, messages } }];"
+      },
+      "id": "n7",
+      "name": "Preparar contexto",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key={{ $env.GEMINI_API_KEY }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"system_instruction\": {\n    \"parts\": [{\"text\": \"Você é a Pru, assistente virtual da Pruma IA — startup brasileira que automatiza processos de PMEs com inteligência artificial.\\n\\nSeu objetivo: qualificar leads de forma natural e agendar demonstrações com o time.\\n\\nFLUXO GUIADO:\\n1. Saudação calorosa + peça o nome (se não souber)\\n2. Pergunte sobre a empresa (segmento e porte)\\n3. Identifique a dor principal (atendimento? processos internos? vendas?)\\n4. Qualifique: tem processos manuais repetitivos? qual o volume de atendimentos?\\n5. Se qualificado → apresente Pruma brevemente + ofereça demonstração\\n6. Se não qualificado → agradeça com leveza e encerre\\n\\nREGRAS:\\n- Tom: direto, caloroso, profissional — fale como pessoa, não robô\\n- Mensagens curtas (máx 2-3 linhas por mensagem)\\n- Uma pergunta por vez\\n- Nunca invente preços ou funcionalidades específicas\\n- Se pedirem para falar com humano → responda normalmente E inclua exatamente ao final: [HANDOFF]\\n- Se lead qualificado e pronto para agendar → inclua exatamente ao final: [DEMO]\\n\\nSobre a Pruma IA:\\n- Automação de processos com IA para PMEs brasileiras\\n- Integra WhatsApp, sistemas internos e fluxos de trabalho\\n- Reduz trabalho manual, acelera atendimento, elimina erros\\n- Atende: comércio, serviços, saúde, educação e outros segmentos\"}]\n  },\n  \"contents\": {{ JSON.stringify($json.messages) }},\n  \"generationConfig\": {\n    \"maxOutputTokens\": 500,\n    \"temperature\": 0.7\n  }\n}",
+        "options": {}
+      },
+      "id": "n8",
+      "name": "Gemini IA",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1520, 380]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "const geminiData = $input.first().json;\nconst prepared = $('Preparar contexto').first().json;\n\nconst fullText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text || '';\n\nconst isHandoff = fullText.includes('[HANDOFF]');\nconst isDemo = fullText.includes('[DEMO]');\n\nconst responseText = fullText\n  .replace('[HANDOFF]', '')\n  .replace('[DEMO]', '')\n  .trim();\n\nreturn [{ json: {\n  conversationId: prepared.conversationId,\n  responseText,\n  isHandoff,\n  isDemo\n} }];"
+      },
+      "id": "n9",
+      "name": "Parsear resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1740, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://chatwoot-chatwoot.1nzdmi.easypanel.host/api/v1/accounts/2/conversations/{{ $json.conversationId }}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "m5oG8mUTevawjQWN7BTzwXcW"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"content\": {{ JSON.stringify($json.responseText) }},\n  \"message_type\": \"outgoing\",\n  \"private\": false\n}",
+        "options": {}
+      },
+      "id": "n10",
+      "name": "Enviar resposta",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1960, 260]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "c4",
+              "leftValue": "={{ $json.isHandoff }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "n11",
+      "name": "É handoff?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1960, 500]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://chatwoot-chatwoot.1nzdmi.easypanel.host/api/v1/accounts/2/conversations/{{ $('Parsear resposta').first().json.conversationId }}/labels",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api_access_token",
+              "value": "m5oG8mUTevawjQWN7BTzwXcW"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"labels\": [\"humano\"]\n}",
+        "options": {}
+      },
+      "id": "n12",
+      "name": "Label: humano",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2180, 400]
+    }
+  ],
+  "connections": {
+    "Chatwoot Webhook": {
+      "main": [
+        [
+          { "node": "Respond 200", "type": "main", "index": 0 },
+          { "node": "É mensagem do cliente?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "É mensagem do cliente?": {
+      "main": [
+        [{ "node": "Verificar bot ativo", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Verificar bot ativo": {
+      "main": [
+        [{ "node": "Bot pausado?", "type": "main", "index": 0 }]
+      ]
+    },
+    "Bot pausado?": {
+      "main": [
+        [],
+        [{ "node": "Buscar histórico", "type": "main", "index": 0 }]
+      ]
+    },
+    "Buscar histórico": {
+      "main": [
+        [{ "node": "Preparar contexto", "type": "main", "index": 0 }]
+      ]
+    },
+    "Preparar contexto": {
+      "main": [
+        [{ "node": "Gemini IA", "type": "main", "index": 0 }]
+      ]
+    },
+    "Gemini IA": {
+      "main": [
+        [{ "node": "Parsear resposta", "type": "main", "index": 0 }]
+      ]
+    },
+    "Parsear resposta": {
+      "main": [
+        [
+          { "node": "Enviar resposta", "type": "main", "index": 0 },
+          { "node": "É handoff?", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "É handoff?": {
+      "main": [
+        [{ "node": "Label: humano", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "maxConcurrency": 1
+  }
+}
